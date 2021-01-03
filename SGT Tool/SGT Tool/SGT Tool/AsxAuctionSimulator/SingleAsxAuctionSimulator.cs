@@ -35,6 +35,10 @@ namespace SGT_Tool
 
         private void resetButton_OnClick(object sender, EventArgs e)
         {
+            IEPValue_label.Text = "0";
+            IEQValue_Label.Text = "0";
+            PotDollar_Label.Text = "0";
+            
             IMdLoader mdLoader = new CsvMdLoader(mdFileName.Text);
             mMdRepository = new MdRepository(mdLoader);
 
@@ -87,12 +91,54 @@ namespace SGT_Tool
 
         private void CalcButton_OnClick(object sender, EventArgs e)
         {
-            AuctionMatchResult r = AsxAuctionMatchCalculator.Calc(
-                bidDataGridView.Rows.Cast<DataGridViewRow>().Select(r1 => r1.DataBoundItem as DisplayOrder).ToList(),
-                askDataGridView.Rows.Cast<DataGridViewRow>().Select(r2 => r2.DataBoundItem as DisplayOrder).ToList());
+            List<DisplayOrder> bids = bidDataGridView.Rows.Cast<DataGridViewRow>().Select(r1 => r1.DataBoundItem as DisplayOrder).ToList();
+            List<DisplayOrder> asks = askDataGridView.Rows.Cast<DataGridViewRow>().Select(r2 => r2.DataBoundItem as DisplayOrder).ToList();
+
+            AuctionMatchResult r = AsxAuctionMatchCalculator.Calc(bids, asks);
 
             IEPValue_label.Text = r.IEP.ToString();
             IEQValue_Label.Text = r.IEV.ToString();
+
+            if (string.IsNullOrEmpty(FvTextBox.Text))
+            {
+                return;
+            }
+            try
+            {
+                double fv = double.Parse(FvTextBox.Text);
+                double bidPot = 0;
+                double askPot = 0;
+
+                foreach(DisplayOrder o in bids)
+                {
+                    if(o.Px >= fv)
+                    {
+                        double refPx = o.Px;
+                        if(r.IEP != 0)
+                        {
+                            refPx = r.IEP;
+                        }
+                        bidPot += o.Qty * (refPx - fv);
+                    }
+                }
+
+                foreach (DisplayOrder o in asks)
+                {
+                    if (o.Px <= fv)
+                    {
+                        double refPx = o.Px;
+                        if (r.IEP != 0)
+                        {
+                            refPx = r.IEP;
+                        }
+                        askPot += o.Qty * (fv - refPx);
+                    }
+                }
+
+                PotDollar_Label.Text = Math.Max(bidPot, askPot).ToString();
+
+            }catch(Exception ex) { };
+                
         }
     }
 }
