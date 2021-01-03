@@ -273,7 +273,7 @@ namespace SGT_Tool
                     e.CellStyle.BackColor = Color.LightSalmon;
                 }else if ((int) e.Value < qty)
                 {
-                    e.CellStyle.BackColor = Color.DarkSalmon;
+                    e.CellStyle.BackColor = Color.Tomato;
                 }
             }
         }
