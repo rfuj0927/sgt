@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGT Tool", "SGT Tool\SGT Tool.csproj", "{DDABFE61-1060-4001-BF3A-079A9EF85DAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDABFE61-1060-4001-BF3A-079A9EF85DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDABFE61-1060-4001-BF3A-079A9EF85DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDABFE61-1060-4001-BF3A-079A9EF85DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDABFE61-1060-4001-BF3A-079A9EF85DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {695AEBDF-34F1-4C11-83F0-0F0349D2ED0A}
+	EndGlobalSection
+EndGlobal
