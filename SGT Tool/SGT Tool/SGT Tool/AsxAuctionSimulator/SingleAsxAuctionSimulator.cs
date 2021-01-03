@@ -270,10 +270,10 @@ namespace SGT_Tool
                 }
                 if ((int) e.Value == qty)
                 {
-                    e.CellStyle.BackColor = Color.Salmon;
+                    e.CellStyle.BackColor = Color.LightSalmon;
                 }else if ((int) e.Value < qty)
                 {
-                    e.CellStyle.BackColor = Color.LightSalmon;
+                    e.CellStyle.BackColor = Color.DarkSalmon;
                 }
             }
         }
