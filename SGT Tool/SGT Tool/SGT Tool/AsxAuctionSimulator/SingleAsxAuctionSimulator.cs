@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ninject;
 using SGT_Tool.AsxAuctionSimulator;
+using static SGT_Tool.SingleAsxAuctionSimulator;
 
 namespace SGT_Tool
 {
@@ -64,6 +65,7 @@ namespace SGT_Tool
             }
             bidDataGridView.DataSource = bidsBS;
             bidDataGridView.AutoGenerateColumns = true;
+            bidDataGridView.AutoResizeColumns();
 
             BindingSource asksBS = new BindingSource();
             asksBS.DataSource = typeof(DisplayOrder);
@@ -74,18 +76,33 @@ namespace SGT_Tool
             }
             askDataGridView.DataSource = asksBS;
             askDataGridView.AutoGenerateColumns = true;
+            askDataGridView.AutoResizeColumns();
         }
         public class DisplayOrder
         {
-            public double Px {get;}
+            public double Px { get; }
             public int Qty { get; }
             public int PrioritySeq { get; }
+
+            public int MatchingQty { get; set; }
+            public double Pnl { get; set; }
+
+            public Boolean IsOwnOrder { get; }
 
             public DisplayOrder(MdOrder order)
             {
                 this.Px = order.Px;
                 this.Qty = order.Qty;
                 this.PrioritySeq = order.PrioritySeq;
+                this.IsOwnOrder = false;
+            }
+
+            public DisplayOrder(double px, int qty)
+            {
+                this.Px = px;
+                this.Qty = qty;
+                this.PrioritySeq = int.MaxValue;
+                this.IsOwnOrder = true;
             }
         }
 
@@ -99,8 +116,28 @@ namespace SGT_Tool
             IEPValue_label.Text = r.IEP.ToString();
             IEQValue_Label.Text = r.IEV.ToString();
 
+            BindingSource bs = (BindingSource)bidDataGridView.DataSource;
+
+            int cumMatchQty = 0;
+            foreach (DisplayOrder o in bs)
+            {
+                o.MatchingQty = Math.Max(0, Math.Min(r.IEV - cumMatchQty, o.Qty));
+                cumMatchQty += o.MatchingQty;
+            }
+
+            bs = (BindingSource)askDataGridView.DataSource;
+
+            cumMatchQty = 0;
+            foreach (DisplayOrder o in bs)
+            {
+                o.MatchingQty = Math.Max(0, Math.Min(r.IEV - cumMatchQty, o.Qty));
+                cumMatchQty += o.MatchingQty;
+            }
+
+
             if (string.IsNullOrEmpty(FvTextBox.Text))
             {
+                Redraw();
                 return;
             }
             try
@@ -137,8 +174,108 @@ namespace SGT_Tool
 
                 PotDollar_Label.Text = Math.Max(bidPot, askPot).ToString();
 
-            }catch(Exception ex) { };
-                
+                bs = (BindingSource)bidDataGridView.DataSource;
+                double ownPnl =0;
+                foreach (DisplayOrder o in bs)
+                {
+                    o.Pnl = o.MatchingQty * (fv - r.IEP);
+                    
+                    if (o.IsOwnOrder)
+                    {
+                        ownPnl += o.Pnl;
+                    }
+                }
+
+                bs = (BindingSource)askDataGridView.DataSource;
+                foreach (DisplayOrder o in bs)
+                {
+                    o.Pnl = o.MatchingQty * (r.IEP - fv);
+
+                    if (o.IsOwnOrder)
+                    {
+                        ownPnl += o.Pnl;
+                    }
+                }
+
+                OwnPnlLabel.Text = ownPnl.ToString();
+
+            }
+            catch(Exception ex) { };
+
+            Redraw();
+        }
+
+        public void Redraw()
+        {
+            bidDataGridView.Invalidate();
+            askDataGridView.Invalidate();
+        }
+
+        private void addBuyButton_OnClick(object sender, EventArgs e)
+        {
+            int qty = int.Parse(AddQtyTextBox.Text);
+            double px = double.Parse(AddPxTextbox.Text);
+
+            BindingSource bs = (BindingSource) bidDataGridView.DataSource;
+
+            int index = 0;
+
+            foreach (DisplayOrder o in bs)
+            {
+                if (o.Px < px)
+                {
+                    break;
+                }
+                index++;
+            }
+            bs.Insert(index, new DisplayOrder(px, qty));
+        }
+
+        private void addSellButton_OnClick(object sender, EventArgs e)
+        {
+            int qty = int.Parse(AddQtyTextBox.Text);
+            double px = double.Parse(AddPxTextbox.Text);
+
+            BindingSource bs = (BindingSource)askDataGridView.DataSource;
+
+            int index = 0;
+
+            foreach (DisplayOrder o in bs)
+            {
+                if (o.Px > px)
+                {
+                    break;
+                }
+                index++;
+            }
+            bs.Insert(index, new DisplayOrder(px, qty));
+        }
+
+        private void dgv_OnCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if(e.Value == null)
+            {
+                return;
+            }
+   
+            DataGridView dgv = (DataGridView) sender;
+
+            string colName = dgv.Columns[e.ColumnIndex].Name;
+            if(colName== "MatchingQty")
+            {
+                int qty = (int) dgv.Rows[e.RowIndex].Cells["Qty"].Value;
+                if((int)e.Value == 0)
+                {
+                    return;
+                }
+                if ((int) e.Value == qty)
+                {
+                    e.CellStyle.BackColor = Color.Salmon;
+                }else if ((int) e.Value < qty)
+                {
+                    e.CellStyle.BackColor = Color.LightSalmon;
+                }
+            }
         }
     }
 }

@@ -9,6 +9,6 @@ namespace SGT_Tool.AsxAuctionSimulator
     public class AuctionMatchResult
     {
         public double IEP;
-        public double IEV;
+        public int IEV;
     }
 }

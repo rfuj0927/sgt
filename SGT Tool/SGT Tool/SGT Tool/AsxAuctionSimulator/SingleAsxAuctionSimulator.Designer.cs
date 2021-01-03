@@ -47,7 +47,17 @@ namespace SGT_Tool
             this.label5 = new System.Windows.Forms.Label();
             this.IEPValue_label = new System.Windows.Forms.Label();
             this.IEQValue_Label = new System.Windows.Forms.Label();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.addBuyButton = new System.Windows.Forms.Button();
+            this.addSellButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.AddPxTextbox = new System.Windows.Forms.TextBox();
+            this.AddQtyTextBox = new System.Windows.Forms.TextBox();
             this.PotDollar_Label = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.OwnPnlLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.calcButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -56,6 +66,8 @@ namespace SGT_Tool
             ((System.ComponentModel.ISupportInitialize)(this.askDataGridView)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -68,25 +80,26 @@ namespace SGT_Tool
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.calcButton, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel7, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 315F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(659, 468);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 326F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(834, 468);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // symbols_ComboBox
             // 
             this.symbols_ComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.symbols_ComboBox.FormattingEnabled = true;
-            this.symbols_ComboBox.Location = new System.Drawing.Point(365, 3);
+            this.symbols_ComboBox.Location = new System.Drawing.Point(497, 3);
             this.symbols_ComboBox.Name = "symbols_ComboBox";
-            this.symbols_ComboBox.Size = new System.Drawing.Size(112, 21);
+            this.symbols_ComboBox.Size = new System.Drawing.Size(155, 21);
             this.symbols_ComboBox.TabIndex = 3;
             this.symbols_ComboBox.SelectedIndexChanged += new System.EventHandler(this.symbolsComboBox_OnSelectionChanged);
             // 
@@ -104,7 +117,7 @@ namespace SGT_Tool
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(356, 46);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(488, 46);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -113,7 +126,7 @@ namespace SGT_Tool
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 46);
+            this.label1.Size = new System.Drawing.Size(73, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "MD Path:";
             // 
@@ -122,15 +135,15 @@ namespace SGT_Tool
             this.mdFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mdFileName.Location = new System.Drawing.Point(54, 3);
+            this.mdFileName.Location = new System.Drawing.Point(82, 3);
             this.mdFileName.Name = "mdFileName";
-            this.mdFileName.Size = new System.Drawing.Size(186, 20);
+            this.mdFileName.Size = new System.Drawing.Size(290, 20);
             this.mdFileName.TabIndex = 1;
             // 
             // resetButton
             // 
             this.resetButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resetButton.Location = new System.Drawing.Point(246, 3);
+            this.resetButton.Location = new System.Drawing.Point(378, 3);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(107, 40);
             this.resetButton.TabIndex = 2;
@@ -149,11 +162,11 @@ namespace SGT_Tool
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.bidDataGridView, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.askDataGridView, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 156);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 145);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(653, 309);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(828, 320);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // bidDataGridView
@@ -164,9 +177,9 @@ namespace SGT_Tool
             this.bidDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bidDataGridView.Location = new System.Drawing.Point(3, 3);
             this.bidDataGridView.Name = "bidDataGridView";
-            this.bidDataGridView.RowHeadersVisible = false;
-            this.bidDataGridView.Size = new System.Drawing.Size(320, 303);
+            this.bidDataGridView.Size = new System.Drawing.Size(408, 314);
             this.bidDataGridView.TabIndex = 0;
+            this.bidDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_OnCellFormatting);
             // 
             // askDataGridView
             // 
@@ -174,11 +187,11 @@ namespace SGT_Tool
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.askDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.askDataGridView.Location = new System.Drawing.Point(329, 3);
+            this.askDataGridView.Location = new System.Drawing.Point(417, 3);
             this.askDataGridView.Name = "askDataGridView";
-            this.askDataGridView.RowHeadersVisible = false;
-            this.askDataGridView.Size = new System.Drawing.Size(321, 303);
+            this.askDataGridView.Size = new System.Drawing.Size(408, 314);
             this.askDataGridView.TabIndex = 1;
+            this.askDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgv_OnCellFormatting);
             // 
             // tableLayoutPanel4
             // 
@@ -187,7 +200,7 @@ namespace SGT_Tool
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.27168F));
             this.tableLayoutPanel4.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.FvTextBox, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(483, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(658, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -216,22 +229,26 @@ namespace SGT_Tool
             this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.9891F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.0109F));
+            this.tableLayoutPanel5.ColumnCount = 4;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.18056F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 78.81944F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 109F));
             this.tableLayoutPanel5.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.label4, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.IEPValue_label, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.IEQValue_Label, 1, 1);
             this.tableLayoutPanel5.Controls.Add(this.PotDollar_Label, 1, 2);
+            this.tableLayoutPanel5.Controls.Add(this.label8, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.OwnPnlLabel, 3, 0);
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 55);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 3;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(356, 95);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(488, 84);
             this.tableLayoutPanel5.TabIndex = 5;
             // 
             // label3
@@ -246,7 +263,7 @@ namespace SGT_Tool
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 30);
+            this.label4.Location = new System.Drawing.Point(3, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(25, 13);
             this.label4.TabIndex = 1;
@@ -255,7 +272,7 @@ namespace SGT_Tool
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 60);
+            this.label5.Location = new System.Drawing.Point(3, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 2;
@@ -264,7 +281,7 @@ namespace SGT_Tool
             // IEPValue_label
             // 
             this.IEPValue_label.AutoSize = true;
-            this.IEPValue_label.Location = new System.Drawing.Point(45, 0);
+            this.IEPValue_label.Location = new System.Drawing.Point(65, 0);
             this.IEPValue_label.Name = "IEPValue_label";
             this.IEPValue_label.Size = new System.Drawing.Size(13, 13);
             this.IEPValue_label.TabIndex = 3;
@@ -273,30 +290,146 @@ namespace SGT_Tool
             // IEQValue_Label
             // 
             this.IEQValue_Label.AutoSize = true;
-            this.IEQValue_Label.Location = new System.Drawing.Point(45, 30);
+            this.IEQValue_Label.Location = new System.Drawing.Point(65, 24);
             this.IEQValue_Label.Name = "IEQValue_Label";
             this.IEQValue_Label.Size = new System.Drawing.Size(13, 13);
             this.IEQValue_Label.TabIndex = 4;
             this.IEQValue_Label.Text = "0";
             // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel6.ColumnCount = 2;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.addBuyButton, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.addSellButton, 1, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label7, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.AddPxTextbox, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.AddQtyTextBox, 1, 1);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(658, 55);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(173, 84);
+            this.tableLayoutPanel6.TabIndex = 7;
+            // 
+            // addBuyButton
+            // 
+            this.addBuyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addBuyButton.Location = new System.Drawing.Point(3, 43);
+            this.addBuyButton.Name = "addBuyButton";
+            this.addBuyButton.Size = new System.Drawing.Size(80, 38);
+            this.addBuyButton.TabIndex = 0;
+            this.addBuyButton.Text = "Add Buy";
+            this.addBuyButton.UseVisualStyleBackColor = true;
+            this.addBuyButton.Click += new System.EventHandler(this.addBuyButton_OnClick);
+            // 
+            // addSellButton
+            // 
+            this.addSellButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addSellButton.Location = new System.Drawing.Point(89, 43);
+            this.addSellButton.Name = "addSellButton";
+            this.addSellButton.Size = new System.Drawing.Size(81, 38);
+            this.addSellButton.TabIndex = 1;
+            this.addSellButton.Text = "Add Sell";
+            this.addSellButton.UseVisualStyleBackColor = true;
+            this.addSellButton.Click += new System.EventHandler(this.addSellButton_OnClick);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(22, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Px:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(26, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Qty:";
+            // 
+            // AddPxTextbox
+            // 
+            this.AddPxTextbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddPxTextbox.Location = new System.Drawing.Point(89, 3);
+            this.AddPxTextbox.Name = "AddPxTextbox";
+            this.AddPxTextbox.Size = new System.Drawing.Size(81, 20);
+            this.AddPxTextbox.TabIndex = 4;
+            // 
+            // AddQtyTextBox
+            // 
+            this.AddQtyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddQtyTextBox.Location = new System.Drawing.Point(89, 23);
+            this.AddQtyTextBox.Name = "AddQtyTextBox";
+            this.AddQtyTextBox.Size = new System.Drawing.Size(81, 20);
+            this.AddQtyTextBox.TabIndex = 5;
+            // 
             // PotDollar_Label
             // 
             this.PotDollar_Label.AutoSize = true;
-            this.PotDollar_Label.Location = new System.Drawing.Point(45, 60);
+            this.PotDollar_Label.Location = new System.Drawing.Point(65, 48);
             this.PotDollar_Label.Name = "PotDollar_Label";
             this.PotDollar_Label.Size = new System.Drawing.Size(13, 13);
             this.PotDollar_Label.TabIndex = 5;
             this.PotDollar_Label.Text = "0";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(296, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 9);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Own PNL";
+            // 
+            // OwnPnlLabel
+            // 
+            this.OwnPnlLabel.AutoSize = true;
+            this.OwnPnlLabel.Location = new System.Drawing.Point(381, 0);
+            this.OwnPnlLabel.Name = "OwnPnlLabel";
+            this.OwnPnlLabel.Size = new System.Drawing.Size(9, 9);
+            this.OwnPnlLabel.TabIndex = 7;
+            this.OwnPnlLabel.Text = "0";
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 1;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Controls.Add(this.calcButton, 0, 0);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(497, 55);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 2;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(155, 84);
+            this.tableLayoutPanel7.TabIndex = 8;
+            // 
             // calcButton
             // 
-            this.calcButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.calcButton.Location = new System.Drawing.Point(365, 55);
+            this.calcButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calcButton.Location = new System.Drawing.Point(2, 2);
             this.calcButton.Name = "calcButton";
-            this.calcButton.Size = new System.Drawing.Size(112, 95);
-            this.calcButton.TabIndex = 6;
+            this.calcButton.Size = new System.Drawing.Size(99, 24);
+            this.calcButton.TabIndex = 9;
             this.calcButton.Text = "Calc";
             this.calcButton.UseVisualStyleBackColor = true;
             this.calcButton.Click += new System.EventHandler(this.CalcButton_OnClick);
@@ -305,7 +438,7 @@ namespace SGT_Tool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 468);
+            this.ClientSize = new System.Drawing.Size(834, 468);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SingleAsxAuctionSimulator";
             this.Text = "SingleAsxAuctionSimulator";
@@ -320,6 +453,9 @@ namespace SGT_Tool
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -344,7 +480,17 @@ namespace SGT_Tool
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label IEPValue_label;
         private System.Windows.Forms.Label IEQValue_Label;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Button addBuyButton;
+        private System.Windows.Forms.Button addSellButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox AddPxTextbox;
+        private System.Windows.Forms.TextBox AddQtyTextBox;
         private System.Windows.Forms.Label PotDollar_Label;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label OwnPnlLabel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Button calcButton;
     }
 }
