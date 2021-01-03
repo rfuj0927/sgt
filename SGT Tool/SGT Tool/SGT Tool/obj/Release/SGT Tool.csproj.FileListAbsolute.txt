@@ -1,0 +1,38 @@
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\AuctionMdFile.csv
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\SGT Tool.exe.config
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\SGT Tool.exe
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\SGT Tool.pdb
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\CsvHelper.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\Microsoft.Bcl.HashCode.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\Ninject.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Buffers.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Configuration.ConfigurationManager.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Memory.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Numerics.Vectors.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Security.AccessControl.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Security.Permissions.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Security.Principal.Windows.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\CsvHelper.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\Microsoft.Bcl.HashCode.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\Ninject.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Buffers.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Configuration.ConfigurationManager.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Memory.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Numerics.Vectors.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Security.AccessControl.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Security.Permissions.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Security.Principal.Windows.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT_Tool.Properties.Resources.resources
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT_Tool.SgtToolForm.resources
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT_Tool.SingleAsxAuctionSimulator.resources
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT Tool.csproj.GenerateResource.cache
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT Tool.csproj.CoreCompileInputs.cache
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT Tool.csproj.CopyComplete
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT Tool.exe
+C:\DEV\sgt\SGT Tool\SGT Tool\SGT Tool\obj\Release\SGT Tool.pdb
