@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static SGT_Tool.SingleAsxAuctionSimulator;
 
 namespace SGT_Tool.AsxAuctionSimulator
@@ -87,7 +84,7 @@ namespace SGT_Tool.AsxAuctionSimulator
                 return result;
             }
 
-            // we either solved with min surpluse already, or we just use the sell pressure as we dont have a concept of previous close price.
+            // we either solved with min surplus already, or we just use the sell pressure as we dont have a concept of previous close price.
             result.IEP = candidatePriceSet[minSurplusCandidateIndices.First()];
             result.IEV = maxExecVol[minSurplusCandidateIndices.First()];
             return result;

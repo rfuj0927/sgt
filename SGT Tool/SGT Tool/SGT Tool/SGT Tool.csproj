@@ -98,7 +98,6 @@
     <Compile Include="AsxAuctionSimulator\MDOrderBook\CsvMdLoader.cs" />
     <Compile Include="AsxAuctionSimulator\MDOrderBook\IMdLoader.cs" />
     <Compile Include="AsxAuctionSimulator\MDOrderBook\Orderbook.cs" />
-    <Compile Include="AsxAuctionSimulator\MDOrderBook\IOrderbookSide.cs" />
     <Compile Include="AsxAuctionSimulator\MDOrderBook\MdRepository.cs" />
     <Compile Include="AsxAuctionSimulator\MDOrderBook\MdOrder.cs" />
     <Compile Include="SGTTMainForm.cs">
