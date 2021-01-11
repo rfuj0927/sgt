@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>SGT_Utils</RootNamespace>
+    <TargetFramework>net462</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="EikonPipeDll.dll" />
+    <None Remove="I18nResource.dll" />
+    <None Remove="msvcp120.dll" />
+    <None Remove="msvcr120.dll" />
+    <None Remove="ThomsonReuters.Desktop.SDK.DataAccess.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="4.14.0" />
+    <PackageReference Include="ThomsonReuters.Desktop.SDK.DataAccess.Signed" Version="1.8.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ThomsonReuters.Desktop.SDK.DataAccess">
+      <HintPath>..\ThirdParty\TR\References\ThomsonReuters.Desktop.SDK.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="ThomsonReuters.Udap.BusTools">
+      <HintPath>..\ThirdParty\TR\References\ThomsonReuters.Udap.BusTools.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="EikonPipeDll.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="I18nResource.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcp120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ThomsonReuters.Desktop.SDK.DataAccess.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SgtTrUtils\EikonPipeDll.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SgtTrUtils\I18nResource.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SgtTrUtils\msvcp120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="SgtTrUtils\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
