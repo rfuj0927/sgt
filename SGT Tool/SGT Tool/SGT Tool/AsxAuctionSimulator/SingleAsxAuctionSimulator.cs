@@ -38,8 +38,10 @@ namespace SGT_Tool
         {
             IEPValue_label.Text = "0";
             IEQValue_Label.Text = "0";
-            PotDollar_Label.Text = "0";
-            
+            PotDollarDB_Label.Text = "0";
+            PotDollarMM_Label.Text = "0";
+            PotDollarContinuous_Label.Text = "0";
+
             IMdLoader mdLoader = new CsvMdLoader(mdFileName.Text);
             mMdRepository = new MdRepository(mdLoader);
 
@@ -143,43 +145,16 @@ namespace SGT_Tool
             try
             {
                 double fv = double.Parse(FvTextBox.Text);
-                double bidPot = 0;
-                double askPot = 0;
-
-                foreach(DisplayOrder o in bids)
-                {
-                    if(o.Px >= fv)
-                    {
-                        double refPx = o.Px;
-                        if(r.IEP != 0)
-                        {
-                            refPx = r.IEP;
-                        }
-                        bidPot += o.Qty * (refPx - fv);
-                    }
-                }
-
-                foreach (DisplayOrder o in asks)
-                {
-                    if (o.Px <= fv)
-                    {
-                        double refPx = o.Px;
-                        if (r.IEP != 0)
-                        {
-                            refPx = r.IEP;
-                        }
-                        askPot += o.Qty * (fv - refPx);
-                    }
-                }
-
-                PotDollar_Label.Text = Math.Max(bidPot, askPot).ToString();
+                PotDollarDB_Label.Text = GetDbPotDollar(bids, asks, r, fv).ToString();
+                PotDollarMM_Label.Text = GetMMPotDollar(bids, asks, r, fv).ToString();
+                PotDollarContinuous_Label.Text = GetContinuousPotDollar(bids, asks, r, fv).ToString();
 
                 bs = (BindingSource)bidDataGridView.DataSource;
-                double ownPnl =0;
+                double ownPnl = 0;
                 foreach (DisplayOrder o in bs)
                 {
                     o.Pnl = o.MatchingQty * (fv - r.IEP);
-                    
+
                     if (o.IsOwnOrder)
                     {
                         ownPnl += o.Pnl;
@@ -200,9 +175,105 @@ namespace SGT_Tool
                 OwnPnlLabel.Text = ownPnl.ToString();
 
             }
-            catch(Exception ex) { };
+            catch (Exception ex) { };
 
             Redraw();
+        }
+
+        private double GetDbPotDollar(List<DisplayOrder> bids, List<DisplayOrder> asks, AuctionMatchResult r, double fv)
+        {
+            double bidPot = 0;
+            double askPot = 0;
+
+            foreach (DisplayOrder o in bids)
+            {
+                if (o.Px >= fv)
+                {
+                    double refPx = o.Px;
+                    if (r.IEP != 0)
+                    {
+                        refPx = r.IEP;
+                    }
+                    bidPot += o.Qty * (refPx - fv);
+                }
+            }
+
+            foreach (DisplayOrder o in asks)
+            {
+                if (o.Px <= fv)
+                {
+                    double refPx = o.Px;
+                    if (r.IEP != 0)
+                    {
+                        refPx = r.IEP;
+                    }
+                    askPot += o.Qty * (fv - refPx);
+                }
+            }
+
+            return Math.Max(bidPot, askPot);
+        }
+
+        private double GetMMPotDollar(List<DisplayOrder> bids, List<DisplayOrder> asks, AuctionMatchResult r, double fv)
+        {
+            double bidPot = 0;
+            double askPot = 0;
+
+            foreach (DisplayOrder o in bids)
+            {
+                if (o.Px >= fv)
+                {
+                    double refPx = o.Px;
+                    if (r.IEP != 0)
+                    {
+                        refPx = Math.Min(r.IEP, refPx);
+                    }
+                    bidPot += o.Qty * (refPx - fv);
+                }
+            }
+
+            foreach (DisplayOrder o in asks)
+            {
+                if (o.Px <= fv)
+                {
+                    double refPx = o.Px;
+                    if (r.IEP != 0)
+                    {
+                        refPx = Math.Max(r.IEP, refPx);
+                    }
+                    askPot += o.Qty * (fv - refPx);
+                }
+            }
+
+            return Math.Max(bidPot, askPot);
+        }
+
+        private double GetContinuousPotDollar(List<DisplayOrder> bids, List<DisplayOrder> asks, AuctionMatchResult r, double fv)
+        {
+            double bidPot = 0;
+            double askPot = 0;
+
+            foreach (DisplayOrder o in bids)
+            {
+                if (o.Px >= fv)
+                {
+                    double refPx = o.Px;
+                   
+                    bidPot += o.Qty * (refPx - fv);
+                }
+            }
+
+            foreach (DisplayOrder o in asks)
+            {
+                if (o.Px <= fv)
+                {
+                    double refPx = o.Px;
+                 
+                    askPot += o.Qty * (fv - refPx);
+                }
+            }
+
+            return Math.Max(bidPot, askPot);
         }
 
         public void Redraw()
