@@ -66,15 +66,14 @@ namespace SGT_MRA
 
         private RegressionResult PerformUnhedged(double[] yVal)
         {
-            RegressionResult r = new RegressionResult();
-            r.xVars = "Unhedged";
-            
+            RegressionResult r = new RegressionResult();          
             double average = yVal.Average();
-            r.Intercept = average;
+            r.Mean = average;
 
             double sumOfSquaresOfDifferences = yVal.Select(val => (val - average) * (val - average)).Sum();
             double sd = Math.Sqrt(sumOfSquaresOfDifferences / yVal.Length);
 
+            r.ModelType = "UNHEDGED";
             r.StandardError = sd;
             r.xVarCount = 0;
             r.SamplesCount = yVal.Length;
@@ -136,13 +135,14 @@ namespace SGT_MRA
             double[] predicted = regression.Transform(xVals);
 
             RegressionResult r = new RegressionResult();
+            r.ModelType = "OLS";
             r.StandardError = regression.GetStandardError(xVals, yVal);
             r.RSquared = new RSquaredLoss(xVals.Length, yVal).Loss(predicted);
             r.Betas = string.Join(";", regression.Weights.Select(x=>Math.Round(x, 4)).ToList());
             r.xVars = string.Join(";", xVars);
             r.xVarCount = regression.NumberOfInputs;
             r.SamplesCount = yVal.Length;
-            r.Intercept = regression.Intercept;
+            r.Mean = regression.Intercept;
 
             return r;
         }
@@ -177,7 +177,7 @@ namespace SGT_MRA
                         int j = 0;
                         foreach (VariablePair vp in mMraParams.xVariables)
                         {
-                            xVals[i][j] = Math.Log(vp.priceReturnSeries[dt], vp.priceReturnSeries[(DateTime)priorDt]);
+                            xVals[i][j] = Math.Log(vp.priceReturnSeries[dt] / vp.priceReturnSeries[(DateTime)priorDt]);
                             j++;
                         }
                     }
@@ -195,29 +195,24 @@ namespace SGT_MRA
 
             switch (vp.seriesType)
             {
-                case SeriesType.NavTr:
-                    {
-                        series = mDataQuerier.GetNavPriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
-                        Dictionary<DateTime, double> divSeries = mDataQuerier.GetEtfDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
-                        foreach (KeyValuePair<DateTime, double> kvp in divSeries)
-                        {
-                            series[kvp.Key] = series[kvp.Key] + divSeries.Where(k => k.Key <= kvp.Key).Select(k => k.Value).Sum();
-                        }
-                        break;
-                    }
                 case SeriesType.Price:
 
                     series = mDataQuerier.GetClosePriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
                     break;
 
+                case SeriesType.NavTr:
+                    {
+                        series = mDataQuerier.GetNavPriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                        Dictionary<DateTime, double> divSeries = mDataQuerier.GetEtfDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                        AddCumulativeDivsToTimeSeries(series, divSeries);
+                        break;
+                    }
+
                 case SeriesType.PriceTr:
                     {
                         series = mDataQuerier.GetClosePriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
                         Dictionary<DateTime, double> divSeries = mDataQuerier.GetStockDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
-                        foreach (KeyValuePair<DateTime, double> kvp in divSeries)
-                        {
-                            series[kvp.Key] = series[kvp.Key] + divSeries.Where(k => k.Key <= kvp.Key).Select(k => k.Value).Sum();
-                        }
+                        AddCumulativeDivsToTimeSeries(series, divSeries);
                         break;
                     }
                 default:
@@ -230,6 +225,17 @@ namespace SGT_MRA
             }
 
             return series;
+        }
+
+        private static void AddCumulativeDivsToTimeSeries(Dictionary<DateTime, double> series, Dictionary<DateTime, double> divSeries)
+        {
+            List<DateTime> dtKeys = new List<DateTime>(series.Keys);
+
+            foreach (DateTime dt in dtKeys)
+            {
+                double cumDiv = divSeries.Where(k => k.Key <= dt).Select(k => k.Value).Sum();
+                series[dt] = series[dt] + cumDiv;
+            }
         }
 
         private void OnProgressChanged(string progress)

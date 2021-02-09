@@ -48,6 +48,8 @@ namespace SGT_MRA
             this.label6 = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
             this.resultsDgv = new System.Windows.Forms.DataGridView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.returnTypeComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xParamsDgv)).BeginInit();
@@ -74,8 +76,8 @@ namespace SGT_MRA
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 4;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.72474F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.10104F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
@@ -91,6 +93,8 @@ namespace SGT_MRA
             this.tableLayoutPanel2.Controls.Add(this.regressButton, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 9);
             this.tableLayoutPanel2.Controls.Add(this.statusLabel, 1, 9);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.returnTypeComboBox, 3, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -138,7 +142,7 @@ namespace SGT_MRA
             // fromDateTimePicker
             // 
             this.fromDateTimePicker.CustomFormat = "";
-            this.fromDateTimePicker.Location = new System.Drawing.Point(54, 3);
+            this.fromDateTimePicker.Location = new System.Drawing.Point(49, 3);
             this.fromDateTimePicker.Name = "fromDateTimePicker";
             this.fromDateTimePicker.Size = new System.Drawing.Size(89, 20);
             this.fromDateTimePicker.TabIndex = 5;
@@ -170,12 +174,12 @@ namespace SGT_MRA
             this.SeriesType});
             this.tableLayoutPanel2.SetColumnSpan(this.xParamsDgv, 3);
             this.xParamsDgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xParamsDgv.Location = new System.Drawing.Point(54, 111);
+            this.xParamsDgv.Location = new System.Drawing.Point(49, 111);
             this.xParamsDgv.Name = "xParamsDgv";
             this.xParamsDgv.RowHeadersVisible = false;
             this.tableLayoutPanel2.SetRowSpan(this.xParamsDgv, 5);
-            this.xParamsDgv.Size = new System.Drawing.Size(251, 129);
-            this.xParamsDgv.TabIndex = 10;
+            this.xParamsDgv.Size = new System.Drawing.Size(256, 129);
+            this.xParamsDgv.TabIndex = 2;
             this.xParamsDgv.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.xParamsDgv_OnCellValidating);
             // 
             // Ric
@@ -199,6 +203,7 @@ namespace SGT_MRA
             // 
             // ySeriesTypeComboBox
             // 
+            this.ySeriesTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ySeriesTypeComboBox.FormattingEnabled = true;
             this.ySeriesTypeComboBox.Location = new System.Drawing.Point(202, 30);
             this.ySeriesTypeComboBox.Name = "ySeriesTypeComboBox";
@@ -207,14 +212,14 @@ namespace SGT_MRA
             // 
             // ySymbolTextBox
             // 
-            this.ySymbolTextBox.Location = new System.Drawing.Point(54, 30);
+            this.ySymbolTextBox.Location = new System.Drawing.Point(49, 30);
             this.ySymbolTextBox.Name = "ySymbolTextBox";
             this.ySymbolTextBox.Size = new System.Drawing.Size(89, 20);
-            this.ySymbolTextBox.TabIndex = 11;
+            this.ySymbolTextBox.TabIndex = 1;
             // 
             // regressButton
             // 
-            this.regressButton.Location = new System.Drawing.Point(54, 57);
+            this.regressButton.Location = new System.Drawing.Point(49, 57);
             this.regressButton.Name = "regressButton";
             this.regressButton.Size = new System.Drawing.Size(89, 21);
             this.regressButton.TabIndex = 12;
@@ -235,7 +240,7 @@ namespace SGT_MRA
             // 
             this.statusLabel.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.statusLabel, 3);
-            this.statusLabel.Location = new System.Drawing.Point(54, 243);
+            this.statusLabel.Location = new System.Drawing.Point(49, 243);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(50, 13);
             this.statusLabel.TabIndex = 14;
@@ -243,6 +248,7 @@ namespace SGT_MRA
             // 
             // resultsDgv
             // 
+            this.resultsDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.resultsDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -260,6 +266,24 @@ namespace SGT_MRA
             this.resultsDgv.Size = new System.Drawing.Size(799, 271);
             this.resultsDgv.TabIndex = 1;
             this.resultsDgv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.resutlsDgv_OnCellFormatting);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(156, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 26);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Return Type:";
+            // 
+            // returnTypeComboBox
+            // 
+            this.returnTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.returnTypeComboBox.FormattingEnabled = true;
+            this.returnTypeComboBox.Location = new System.Drawing.Point(202, 57);
+            this.returnTypeComboBox.Name = "returnTypeComboBox";
+            this.returnTypeComboBox.Size = new System.Drawing.Size(95, 21);
+            this.returnTypeComboBox.TabIndex = 16;
             // 
             // SgtMraMainForm
             // 
@@ -300,6 +324,8 @@ namespace SGT_MRA
         private System.Windows.Forms.Button regressButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox returnTypeComboBox;
     }
 }
 

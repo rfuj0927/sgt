@@ -28,7 +28,7 @@ namespace SGT_MRA
 
         Dictionary<DateTime, double> IDataQuerier.GetClosePriceSeries(DateTime fromDt, DateTime toDt, string ticker)
         {
-            return GetTimeSeries(fromDt, toDt, ticker, "TR.Close.Date", "TR.Close");
+            return GetTimeSeries(fromDt, toDt, ticker, "TR.CLOSEPRICE.Date", "TR.CLOSEPRICE");
         }
 
         Dictionary<DateTime, double> IDataQuerier.GetEtfDividendSeries(DateTime fromDt, DateTime toDt, string ticker)
@@ -38,8 +38,7 @@ namespace SGT_MRA
 
         Dictionary<DateTime, double> IDataQuerier.GetStockDividendSeries(DateTime fromDt, DateTime toDt, string ticker)
         {
-            // "TR.DivExDate", "TR.DivRecordDate", "TR.DivPaymentDate", "TR.DivValue", "TR.DivCurr"]
-            return GetTimeSeries(fromDt, toDt, ticker, "TR.DivUnadjustedNet.Date", "TR.DivUnadjustedNet");
+            return GetTimeSeries(fromDt, toDt, ticker, "TR.DivDate", "TR.DivUnadjustedNet");
         }
 
         Dictionary<DateTime, double> IDataQuerier.GetNavPriceSeries(DateTime fromDt, DateTime toDt, string ticker)
@@ -76,7 +75,17 @@ namespace SGT_MRA
                 // expected instrument, date, field 
                 try
                 {
-                    d.Add((DateTime)r.Value.Value.GetAt(1), (double)r.Value.Value.GetAt(2));
+                    Object o1 = r.Value.Value.GetAt(1);
+                    DateTime dt;
+                    if(o1.GetType() == typeof(string))
+                    {
+                        dt = DateTime.Parse((string) o1);
+                    }
+                    else
+                    {
+                        dt = (DateTime) o1;
+                    }
+                    d.Add(dt, Convert.ToDouble(r.Value.Value.GetAt(2)));
                 }catch(Exception ex)
                 {
                     System.Console.Out.Write("TimeSeries data error: " + r.Value.ToString(), ex);

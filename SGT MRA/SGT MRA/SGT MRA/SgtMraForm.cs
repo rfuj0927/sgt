@@ -11,10 +11,11 @@ using System.Windows.Forms;
 
 /*
  * TODO 
- * - handle stock dividends
- * - handle other data sources
+  * - handle other data sources
  * - autoset API key
  * - validate security type is correct for query type
+ * - bug that close prices for YAPc1 does not have 1 decimal place from Reuters.
+ * - should use TotalReturn for PriceTr but Fundamentals database is not supported by .NET API (only realtime or historical at this stage).
  * 
  */
 namespace SGT_MRA
@@ -27,6 +28,7 @@ namespace SGT_MRA
         private static string EIKON_DATA_API_KEY = "74700e057f8846369b99cdec93338ab78a0a3314";
 
         private BindingList<String> mSeriesTypeBindingList = new BindingList<String>();
+        private BindingList<String> mPriceReturnTypeBindingList = new BindingList<String>();
 
         public static string OUT_DATE_FORMAT = "dd/MM/yyyy";
         public SgtMraMainForm()
@@ -36,6 +38,11 @@ namespace SGT_MRA
             foreach(SeriesType s in Enum.GetValues(typeof(SeriesType)))
             {
                 mSeriesTypeBindingList.Add(s.ToString());
+            }
+
+            foreach (ReturnType s in Enum.GetValues(typeof(ReturnType)))
+            {
+                mPriceReturnTypeBindingList.Add(s.ToString());
             }
         }
 
@@ -50,6 +57,7 @@ namespace SGT_MRA
             toDateTimePicker.CustomFormat = OUT_DATE_FORMAT;
            
             ySeriesTypeComboBox.DataSource = mSeriesTypeBindingList;
+            returnTypeComboBox.DataSource = mPriceReturnTypeBindingList;
         }
 
         private void xParamsDgv_OnCellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -82,6 +90,7 @@ namespace SGT_MRA
             p.fromDt = fromDateTimePicker.Value;
             p.toDt = toDateTimePicker.Value;
             p.yVariable = new VariablePair(ySymbolTextBox.Text, (SeriesType)Enum.Parse(typeof(SeriesType), ySeriesTypeComboBox.Text));
+            p.returnType = (ReturnType)Enum.Parse(typeof(ReturnType), returnTypeComboBox.Text);
 
             foreach (DataGridViewRow row in xParamsDgv.Rows)
             {
@@ -105,7 +114,7 @@ namespace SGT_MRA
 
             if(columnName.Equals(GetMemberName((RegressionResult c) => c.RSquared))
                 || columnName.Equals(GetMemberName((RegressionResult c) => c.StandardError))
-                || columnName.Equals(GetMemberName((RegressionResult c) => c.Intercept)))
+                || columnName.Equals(GetMemberName((RegressionResult c) => c.Mean)))
             {
                 e.CellStyle.Format = "N6";
             }

@@ -21,7 +21,7 @@ namespace SGT_MRA
                 Application.Run(new SgtMraMainForm());
             }catch(Exception ex)
             {
-                MessageBox.Show("RuntimeError: ", ex.ToString());
+                MessageBox.Show("RuntimeError: " + ex.ToString(), "ERROR!");
             }
         }
     }
