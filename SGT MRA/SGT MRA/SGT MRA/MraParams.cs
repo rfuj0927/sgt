@@ -12,6 +12,7 @@ namespace SGT_MRA
         public DateTime toDt;
         public VariablePair yVariable;
         public HashSet<VariablePair> xVariables = new HashSet<VariablePair>();
+        public ReturnType returnType = ReturnType.Simple;
     }
 
     public class VariablePair

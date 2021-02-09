@@ -74,7 +74,13 @@ namespace SGT_MRA
             foreach (var r in data.Rows.ObservationsAll)
             {
                 // expected instrument, date, field 
-                d.Add((DateTime)r.Value.Value.GetAt(1), (double)r.Value.Value.GetAt(2));
+                try
+                {
+                    d.Add((DateTime)r.Value.Value.GetAt(1), (double)r.Value.Value.GetAt(2));
+                }catch(Exception ex)
+                {
+                    System.Console.Out.Write("TimeSeries data error: " + r.Value.ToString(), ex);
+                }
             }
             return d;
         }

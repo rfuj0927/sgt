@@ -19,12 +19,13 @@ using System.Windows.Forms;
 namespace SGT_MRA
 {
     public enum SeriesType { NavTr, PriceTr, Price }
+    public enum ReturnType { Simple, Log }
 
     public partial class SgtMraMainForm : Form
     {
         private static string EIKON_DATA_API_KEY = "74700e057f8846369b99cdec93338ab78a0a3314";
 
-        BindingList<String> mSeriesTypeBindingList = new BindingList<String>();
+        private BindingList<String> mSeriesTypeBindingList = new BindingList<String>();
 
         public static string OUT_DATE_FORMAT = "dd/MM/yyyy";
         public SgtMraMainForm()
@@ -67,21 +68,34 @@ namespace SGT_MRA
             }
         }
 
+        public void ProgressChanged(string text)
+        {
+            statusLabel.Text = text;
+
+            resultsDgv.Invalidate();
+        }
+
         private void regressButton_OnClick(object sender, EventArgs e)
         {
             MraParams p = new MraParams();
             p.fromDt = fromDateTimePicker.Value;
             p.toDt = toDateTimePicker.Value;
-            p.yVariable = new VariablePair(ySymbolTextBox.Text, (SeriesType) Enum.Parse(typeof(SeriesType), ySeriesTypeComboBox.Text));
+            p.yVariable = new VariablePair(ySymbolTextBox.Text, (SeriesType)Enum.Parse(typeof(SeriesType), ySeriesTypeComboBox.Text));
 
             foreach (DataGridViewRow row in xParamsDgv.Rows)
             {
-                p.xVariables.Add(new VariablePair((string) row.Cells[0].Value, (SeriesType)Enum.Parse(typeof(SeriesType), (string) row.Cells[1].Value)));
+                if (string.IsNullOrEmpty((string)row.Cells[0].Value))
+                {
+                    continue;
+                }
+
+                p.xVariables.Add(new VariablePair((string)row.Cells[0].Value, (SeriesType)Enum.Parse(typeof(SeriesType), (string)row.Cells[1].Value)));
             }
 
             AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY));
-            analysisEngine.Run();
-
+            resultsDgv.DataSource = analysisEngine.GetResults();
+            analysisEngine.ProgressChanged += ProgressChanged;
+            analysisEngine.RunLinearRegressions();
         }
     }
 }
