@@ -11,12 +11,13 @@ using System.Windows.Forms;
 
 /*
  * TODO 
-  * - handle other data sources
+ * - handle other data sources if available
  * - autoset API key
  * - validate security type is correct for query type
  * - bug that close prices for YAPc1 does not have 1 decimal place from Reuters.
  * - should use TotalReturn for PriceTr but Fundamentals database is not supported by .NET API (only realtime or historical at this stage).
  * - WMCO for FX
+ * - Missing data for CLc1
  */
 namespace SGT_MRA
 {

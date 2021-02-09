@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGT_MRA
@@ -25,8 +26,35 @@ namespace SGT_MRA
         {
             List<String> fields = new List<string> { dtField, dblField };
             Dictionary<String, String> eParams = GetEikonDtParams(fromDt, toDt);
-            var data = mEikon.GetData(new List<String> { ticker }, fields, eParams);
+            int retryCount = 0;
+            
+            var data = ExecuteQuery(ticker, fields, eParams, retryCount);
+            
             return GetDateTimeToDoubleMap(data);
+        }
+
+        private Deedle.Frame<int,string> ExecuteQuery(string ticker, List<string> fields, Dictionary<string, string> eParams, int retryCount)
+        {
+            try
+            {
+                return mEikon.GetData(new List<String> { ticker }, fields, eParams);
+            }
+            catch (Exception ex)
+            {
+                if(retryCount >= 5)
+                {
+                    ex.Data.Add("UserMessage", "BadRequest error despite numerous retries");
+                    throw ex;
+                }
+                if (ex.Message.StartsWith("BadRequest: Backend error. 400 Bad Request"))
+                {
+                    retryCount++;
+                    Thread.Sleep(5000);
+                    return ExecuteQuery(ticker, fields, eParams, retryCount);
+                }
+                
+                throw ex;
+            }
         }
 
         Dictionary<DateTime, double> IDataQuerier.GetClosePriceSeries(DateTime fromDt, DateTime toDt, string ticker)

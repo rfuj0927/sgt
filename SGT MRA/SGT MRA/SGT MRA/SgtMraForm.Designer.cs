@@ -29,7 +29,7 @@ namespace SGT_MRA
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,8 +59,8 @@ namespace SGT_MRA
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.15013F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.84987F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.11504F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.88496F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.resultsDgv, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -70,7 +70,7 @@ namespace SGT_MRA
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.59515F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1119, 277);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1279, 407);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -110,7 +110,7 @@ namespace SGT_MRA
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(308, 271);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(366, 401);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -125,7 +125,7 @@ namespace SGT_MRA
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(156, 0);
+            this.label2.Location = new System.Drawing.Point(185, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 1;
@@ -134,7 +134,7 @@ namespace SGT_MRA
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 27);
+            this.label3.Location = new System.Drawing.Point(3, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 13);
             this.label3.TabIndex = 2;
@@ -143,7 +143,7 @@ namespace SGT_MRA
             // fromDateTimePicker
             // 
             this.fromDateTimePicker.CustomFormat = "";
-            this.fromDateTimePicker.Location = new System.Drawing.Point(49, 3);
+            this.fromDateTimePicker.Location = new System.Drawing.Point(57, 3);
             this.fromDateTimePicker.Name = "fromDateTimePicker";
             this.fromDateTimePicker.Size = new System.Drawing.Size(89, 20);
             this.fromDateTimePicker.TabIndex = 5;
@@ -152,7 +152,7 @@ namespace SGT_MRA
             // toDateTimePicker
             // 
             this.toDateTimePicker.CustomFormat = "";
-            this.toDateTimePicker.Location = new System.Drawing.Point(202, 3);
+            this.toDateTimePicker.Location = new System.Drawing.Point(239, 3);
             this.toDateTimePicker.Name = "toDateTimePicker";
             this.toDateTimePicker.Size = new System.Drawing.Size(95, 20);
             this.toDateTimePicker.TabIndex = 6;
@@ -161,7 +161,7 @@ namespace SGT_MRA
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 108);
+            this.label5.Location = new System.Drawing.Point(3, 160);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 13);
             this.label5.TabIndex = 7;
@@ -175,11 +175,11 @@ namespace SGT_MRA
             this.SeriesType});
             this.tableLayoutPanel2.SetColumnSpan(this.xParamsDgv, 3);
             this.xParamsDgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xParamsDgv.Location = new System.Drawing.Point(49, 111);
+            this.xParamsDgv.Location = new System.Drawing.Point(57, 163);
             this.xParamsDgv.Name = "xParamsDgv";
             this.xParamsDgv.RowHeadersVisible = false;
             this.tableLayoutPanel2.SetRowSpan(this.xParamsDgv, 5);
-            this.xParamsDgv.Size = new System.Drawing.Size(256, 129);
+            this.xParamsDgv.Size = new System.Drawing.Size(306, 194);
             this.xParamsDgv.TabIndex = 2;
             this.xParamsDgv.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.xParamsDgv_OnCellValidating);
             // 
@@ -196,9 +196,9 @@ namespace SGT_MRA
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(156, 27);
+            this.label4.Location = new System.Drawing.Point(185, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 26);
+            this.label4.Size = new System.Drawing.Size(48, 26);
             this.label4.TabIndex = 4;
             this.label4.Text = "SeriesType:";
             // 
@@ -206,21 +206,21 @@ namespace SGT_MRA
             // 
             this.ySeriesTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ySeriesTypeComboBox.FormattingEnabled = true;
-            this.ySeriesTypeComboBox.Location = new System.Drawing.Point(202, 30);
+            this.ySeriesTypeComboBox.Location = new System.Drawing.Point(239, 43);
             this.ySeriesTypeComboBox.Name = "ySeriesTypeComboBox";
             this.ySeriesTypeComboBox.Size = new System.Drawing.Size(95, 21);
             this.ySeriesTypeComboBox.TabIndex = 9;
             // 
             // ySymbolTextBox
             // 
-            this.ySymbolTextBox.Location = new System.Drawing.Point(49, 30);
+            this.ySymbolTextBox.Location = new System.Drawing.Point(57, 43);
             this.ySymbolTextBox.Name = "ySymbolTextBox";
             this.ySymbolTextBox.Size = new System.Drawing.Size(89, 20);
             this.ySymbolTextBox.TabIndex = 1;
             // 
             // regressButton
             // 
-            this.regressButton.Location = new System.Drawing.Point(49, 57);
+            this.regressButton.Location = new System.Drawing.Point(57, 83);
             this.regressButton.Name = "regressButton";
             this.regressButton.Size = new System.Drawing.Size(89, 21);
             this.regressButton.TabIndex = 12;
@@ -231,7 +231,7 @@ namespace SGT_MRA
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 243);
+            this.label6.Location = new System.Drawing.Point(3, 360);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 13;
@@ -241,7 +241,7 @@ namespace SGT_MRA
             // 
             this.statusLabel.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.statusLabel, 3);
-            this.statusLabel.Location = new System.Drawing.Point(49, 243);
+            this.statusLabel.Location = new System.Drawing.Point(57, 360);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(50, 13);
             this.statusLabel.TabIndex = 14;
@@ -251,29 +251,29 @@ namespace SGT_MRA
             // 
             this.resultsDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.resultsDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.resultsDgv.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.resultsDgv.DefaultCellStyle = dataGridViewCellStyle1;
             this.resultsDgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resultsDgv.Location = new System.Drawing.Point(317, 3);
+            this.resultsDgv.Location = new System.Drawing.Point(375, 3);
             this.resultsDgv.Name = "resultsDgv";
             this.resultsDgv.RowHeadersVisible = false;
-            this.resultsDgv.Size = new System.Drawing.Size(799, 271);
+            this.resultsDgv.Size = new System.Drawing.Size(901, 401);
             this.resultsDgv.TabIndex = 1;
             this.resultsDgv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.resutlsDgv_OnCellFormatting);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(156, 54);
+            this.label7.Location = new System.Drawing.Point(185, 80);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 26);
+            this.label7.Size = new System.Drawing.Size(42, 26);
             this.label7.TabIndex = 15;
             this.label7.Text = "Return Type:";
             // 
@@ -281,7 +281,7 @@ namespace SGT_MRA
             // 
             this.returnTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.returnTypeComboBox.FormattingEnabled = true;
-            this.returnTypeComboBox.Location = new System.Drawing.Point(202, 57);
+            this.returnTypeComboBox.Location = new System.Drawing.Point(239, 83);
             this.returnTypeComboBox.Name = "returnTypeComboBox";
             this.returnTypeComboBox.Size = new System.Drawing.Size(95, 21);
             this.returnTypeComboBox.TabIndex = 16;
@@ -290,7 +290,7 @@ namespace SGT_MRA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1119, 277);
+            this.ClientSize = new System.Drawing.Size(1279, 407);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SgtMraMainForm";
