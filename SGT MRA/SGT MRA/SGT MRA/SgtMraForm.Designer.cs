@@ -259,6 +259,7 @@ namespace SGT_MRA
             this.resultsDgv.RowHeadersVisible = false;
             this.resultsDgv.Size = new System.Drawing.Size(799, 271);
             this.resultsDgv.TabIndex = 1;
+            this.resultsDgv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.resutlsDgv_OnCellFormatting);
             // 
             // SgtMraMainForm
             // 

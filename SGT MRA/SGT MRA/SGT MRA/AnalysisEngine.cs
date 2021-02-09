@@ -16,7 +16,7 @@ namespace SGT_MRA
 
         private MraParams mMraParams;
         private IDataQuerier mDataQuerier;
-        private BindingList<RegressionResults> mRegressionResults = new BindingList<RegressionResults>();
+        private BindingList<RegressionResult> mRegressionResults = new BindingList<RegressionResult>();
 
         public AnalysisEngine(MraParams p, IDataQuerier q)
         {
@@ -52,7 +52,10 @@ namespace SGT_MRA
 
             PopulateArrayReturnSeries(dts, yVal, xVars, xVals);
 
-            for(int k =1 ; k <= xVars.Length; k++)
+            OnProgressChanged($"Performing Unhedged model");
+            mRegressionResults.Add(PerformUnhedged(yVal));
+
+            for (int k = 1; k <= xVars.Length; k++)
             {
                 OnProgressChanged($"Performing Regressions for param count: " + k);
                 mRegressionResults.Add(PerformMinimumSEOlsForK(yVal, xVars, xVals, k));
@@ -61,13 +64,31 @@ namespace SGT_MRA
             OnProgressChanged($"Completed");
         }
 
-        public BindingList<RegressionResults> GetResults(){
+        private RegressionResult PerformUnhedged(double[] yVal)
+        {
+            RegressionResult r = new RegressionResult();
+            r.xVars = "Unhedged";
+            
+            double average = yVal.Average();
+            r.Intercept = average;
+
+            double sumOfSquaresOfDifferences = yVal.Select(val => (val - average) * (val - average)).Sum();
+            double sd = Math.Sqrt(sumOfSquaresOfDifferences / yVal.Length);
+
+            r.StandardError = sd;
+            r.xVarCount = 0;
+            r.SamplesCount = yVal.Length;
+
+            return r;
+        }
+
+        public BindingList<RegressionResult> GetResults(){
             return mRegressionResults;
         }
 
-        private static RegressionResults PerformMinimumSEOlsForK(double[] yVal, string[] xVars, double[][] xVals, int k)
+        private static RegressionResult PerformMinimumSEOlsForK(double[] yVal, string[] xVars, double[][] xVals, int k)
         {
-            List<RegressionResults> regressionResults = new List<RegressionResults>();
+            List<RegressionResult> regressionResults = new List<RegressionResult>();
             
             // for n=2
             // k=1, 2 elements of 1
@@ -103,23 +124,25 @@ namespace SGT_MRA
             return regressionResults.OrderBy(x => x.StandardError).First();
         }
 
-        private static RegressionResults PerformOls(double[] yVal, string[] xVars, double[][] xVals)
+        private static RegressionResult PerformOls(double[] yVal, string[] xVars, double[][] xVals)
         {
             var ols = new OrdinaryLeastSquares()
             {
+                // intercept should represent the return if no impact from inputs. (mean daily return)
                 UseIntercept = false
             };
 
             MultipleLinearRegression regression = ols.Learn(xVals, yVal);
             double[] predicted = regression.Transform(xVals);
 
-            RegressionResults r = new RegressionResults();
-            r.StandardError = new SquareLoss(yVal).Loss(predicted);
+            RegressionResult r = new RegressionResult();
+            r.StandardError = regression.GetStandardError(xVals, yVal);
             r.RSquared = new RSquaredLoss(xVals.Length, yVal).Loss(predicted);
             r.Betas = string.Join(";", regression.Weights.Select(x=>Math.Round(x, 4)).ToList());
             r.xVars = string.Join(";", xVars);
             r.xVarCount = regression.NumberOfInputs;
             r.SamplesCount = yVal.Length;
+            r.Intercept = regression.Intercept;
 
             return r;
         }

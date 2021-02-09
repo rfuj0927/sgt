@@ -16,7 +16,13 @@ namespace SGT_MRA
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SgtMraMainForm());
+            try
+            {
+                Application.Run(new SgtMraMainForm());
+            }catch(Exception ex)
+            {
+                MessageBox.Show("RuntimeError: ", ex.ToString());
+            }
         }
     }
 }

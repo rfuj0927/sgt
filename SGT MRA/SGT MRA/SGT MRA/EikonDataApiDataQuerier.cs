@@ -39,7 +39,7 @@ namespace SGT_MRA
         Dictionary<DateTime, double> IDataQuerier.GetStockDividendSeries(DateTime fromDt, DateTime toDt, string ticker)
         {
             // "TR.DivExDate", "TR.DivRecordDate", "TR.DivPaymentDate", "TR.DivValue", "TR.DivCurr"]
-            return GetTimeSeries(fromDt, toDt, ticker, "TR.DivExDate.Date", "TR.DivValue");
+            return GetTimeSeries(fromDt, toDt, ticker, "TR.DivUnadjustedNet.Date", "TR.DivUnadjustedNet");
         }
 
         Dictionary<DateTime, double> IDataQuerier.GetNavPriceSeries(DateTime fromDt, DateTime toDt, string ticker)

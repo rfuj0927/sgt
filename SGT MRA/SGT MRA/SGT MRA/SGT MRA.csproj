@@ -95,7 +95,7 @@
     <Compile Include="EikonDataApiDataQuerier.cs" />
     <Compile Include="IDataQuerier.cs" />
     <Compile Include="MraParams.cs" />
-    <Compile Include="RegressionResults.cs" />
+    <Compile Include="RegressionResult.cs" />
     <Compile Include="SgtMraForm.cs">
       <SubType>Form</SubType>
     </Compile>

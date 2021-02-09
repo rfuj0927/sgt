@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 /*
  * TODO 
- * - handle multicurrency dividends
+ * - handle stock dividends
  * - handle other data sources
  * - autoset API key
  * - validate security type is correct for query type
@@ -96,6 +97,23 @@ namespace SGT_MRA
             resultsDgv.DataSource = analysisEngine.GetResults();
             analysisEngine.ProgressChanged += ProgressChanged;
             analysisEngine.RunLinearRegressions();
+        }
+
+        private void resutlsDgv_OnCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string columnName = resultsDgv.Columns[e.ColumnIndex].Name;
+
+            if(columnName.Equals(GetMemberName((RegressionResult c) => c.RSquared))
+                || columnName.Equals(GetMemberName((RegressionResult c) => c.StandardError))
+                || columnName.Equals(GetMemberName((RegressionResult c) => c.Intercept)))
+            {
+                e.CellStyle.Format = "N6";
+            }
+        }
+
+        public static string GetMemberName<T, TValue>(Expression<Func<T, TValue>> memberAccess)
+        {
+            return ((MemberExpression)memberAccess.Body).Member.Name;
         }
     }
 }
