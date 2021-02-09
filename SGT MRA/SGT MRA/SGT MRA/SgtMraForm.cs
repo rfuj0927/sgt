@@ -16,7 +16,7 @@ using System.Windows.Forms;
  * - validate security type is correct for query type
  * - bug that close prices for YAPc1 does not have 1 decimal place from Reuters.
  * - should use TotalReturn for PriceTr but Fundamentals database is not supported by .NET API (only realtime or historical at this stage).
- * 
+ * - WMCO for FX
  */
 namespace SGT_MRA
 {

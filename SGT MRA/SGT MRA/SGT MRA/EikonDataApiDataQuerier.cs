@@ -11,11 +11,14 @@ namespace SGT_MRA
     {
         private static String EIKON_DATE_PATTERN = "yyyy-MM-dd";
         private IEikon mEikon = null;
+        private HashSet<String> USE_PRICECLOSE_RICS = new HashSet<string>();
 
         public EikonDataApiDataQuerier(String apiKey)
         {
             mEikon = Eikon.CreateDataAPI();
             mEikon.SetAppKey(apiKey);
+
+            USE_PRICECLOSE_RICS.Add(".SPXT");
         }
 
         private Dictionary<DateTime, double> GetTimeSeries(DateTime fromDt, DateTime toDt, string ticker, string dtField, string dblField)
@@ -28,6 +31,16 @@ namespace SGT_MRA
 
         Dictionary<DateTime, double> IDataQuerier.GetClosePriceSeries(DateTime fromDt, DateTime toDt, string ticker)
         {
+            // hack for annoying reuters bugs
+            if (USE_PRICECLOSE_RICS.Contains(ticker))
+            {
+                return GetTimeSeries(fromDt, toDt, ticker, "TR.PriceClose.Date", "TR.PriceClose");
+            }
+            else if (ticker.EndsWith("="))
+            {
+                // FX
+                return GetTimeSeries(fromDt, toDt, ticker, "TR.EUROPECLOSEBIDPRICE.Date", "TR.EUROPECLOSEBIDPRICE");
+            }
             return GetTimeSeries(fromDt, toDt, ticker, "TR.CLOSEPRICE.Date", "TR.CLOSEPRICE");
         }
 
