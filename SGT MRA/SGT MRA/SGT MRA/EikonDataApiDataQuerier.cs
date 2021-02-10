@@ -41,7 +41,7 @@ namespace SGT_MRA
             }
             catch (Exception ex)
             {
-                if(retryCount >= 5)
+                if(retryCount >= 30)
                 {
                     ex.Data.Add("UserMessage", "BadRequest error despite numerous retries");
                     throw ex;
@@ -49,7 +49,7 @@ namespace SGT_MRA
                 if (ex.Message.StartsWith("BadRequest: Backend error. 400 Bad Request"))
                 {
                     retryCount++;
-                    Thread.Sleep(5000);
+                    Thread.Sleep(1000);
                     return ExecuteQuery(ticker, fields, eParams, retryCount);
                 }
                 

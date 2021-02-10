@@ -106,7 +106,7 @@ namespace SGT_MRA
             AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY));
             resultsDgv.DataSource = analysisEngine.GetResults();
             analysisEngine.ProgressChanged += ProgressChanged;
-            analysisEngine.RunLinearRegressions();
+            analysisEngine.Run();
         }
 
         private void resutlsDgv_OnCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

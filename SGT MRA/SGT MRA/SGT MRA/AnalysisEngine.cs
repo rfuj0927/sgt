@@ -24,7 +24,7 @@ namespace SGT_MRA
             this.mDataQuerier = q;
         }
 
-        public void RunLinearRegressions()
+        public void Run()
         {
             mRegressionResults.Clear();
             HashSet<DateTime> intersectDates;
