@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -35,11 +36,14 @@ namespace SGT_MRA
         public static string OUT_DATE_FORMAT = "dd/MM/yyyy";
         public static String mCustomTickerHistoryFilePath;
 
+        private BindingList<RegressionResult> mRegressionResults = new BindingList<RegressionResult>();
+
         public SgtMraMainForm()
         {
             InitializeComponent();
+            resultsDgv.DataSource = mRegressionResults;
 
-            foreach(SeriesType s in Enum.GetValues(typeof(SeriesType)))
+            foreach (SeriesType s in Enum.GetValues(typeof(SeriesType)))
             {
                 mSeriesTypeBindingList.Add(s.ToString());
             }
@@ -81,11 +85,36 @@ namespace SGT_MRA
             }
         }
 
-        public void ProgressChanged(string text)
+        public void OnProgressChanged(string text)
         {
-            statusLabel.Text = text;
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate {
+                    // Running on the UI thread
+                    OnProgressChanged(text);
+                });
+            }
+            else
+            {
+                statusLabel.Text = text;
+                statusLabel.Invalidate();
+            }
+        }
 
-            resultsDgv.Invalidate();
+        public void OnAddRegressionResult(RegressionResult r)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke((MethodInvoker)delegate {
+                    // Running on the UI thread
+                    OnAddRegressionResult(r);
+                });
+            }
+            else
+            {
+                mRegressionResults.Add(r);
+                resultsDgv.Invalidate();
+            }
         }
 
         private void regressButton_OnClick(object sender, EventArgs e)
@@ -106,10 +135,15 @@ namespace SGT_MRA
                 p.xVariables.Add(new VariablePair((string)row.Cells[0].Value, (SeriesType)Enum.Parse(typeof(SeriesType), (string)row.Cells[1].Value)));
             }
 
-            AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY), new CustomTickerHistoryDataQuerier(mCustomTickerHistoryFilePath));
-            resultsDgv.DataSource = analysisEngine.GetResults();
-            analysisEngine.ProgressChanged += ProgressChanged;
-            analysisEngine.Run();
+            mRegressionResults.Clear();
+            resultsDgv.Invalidate();
+
+            Task.Run(()=>{
+                AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY), new CustomTickerHistoryDataQuerier(mCustomTickerHistoryFilePath));
+                analysisEngine.AProgressChanged += OnProgressChanged;
+                analysisEngine.AAddRegressionResult += OnAddRegressionResult;
+                analysisEngine.Run();
+            });
         }
 
         private void resutlsDgv_OnCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

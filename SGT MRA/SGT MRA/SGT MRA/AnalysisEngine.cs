@@ -12,12 +12,12 @@ namespace SGT_MRA
 {
     public class AnalysisEngine
     {
-        public event Action<string> ProgressChanged;
+        public event Action<string> AProgressChanged;
+        public event Action<RegressionResult> AAddRegressionResult;
 
         private MraParams mMraParams;
         private IDataQuerier mEikonDataDataQuerier;
         private CustomTickerHistoryDataQuerier mCustomTickerHistoryDataQuerier;
-        private BindingList<RegressionResult> mRegressionResults = new BindingList<RegressionResult>();
 
         public AnalysisEngine(MraParams p, IDataQuerier q, CustomTickerHistoryDataQuerier c)
         {
@@ -28,24 +28,23 @@ namespace SGT_MRA
 
         public void Run()
         {
-            mRegressionResults.Clear();
             HashSet<DateTime> intersectDates;
 
             // fetch y param
-            OnProgressChanged($"Fetching {mMraParams.yVariable.ticker} time series");
+            ProgressChanged($"Fetching {mMraParams.yVariable.ticker} time series");
             mMraParams.yVariable.priceReturnSeries = GetTimeSeries(mMraParams.yVariable);
             intersectDates = mMraParams.yVariable.priceReturnSeries.Keys.ToHashSet();
 
             // fetch x params
             foreach (VariablePair vp in mMraParams.xVariables)
             {
-                OnProgressChanged($"Fetching {vp.ticker} time series");
+                ProgressChanged($"Fetching {vp.ticker} time series");
                 vp.priceReturnSeries = GetTimeSeries(vp);
 
                 intersectDates.IntersectWith(vp.priceReturnSeries.Keys);
             }
 
-            OnProgressChanged($"Reformatting data");
+            ProgressChanged($"Reformatting data");
             List<DateTime> dts = intersectDates.OrderBy(x => x.Ticks).ToList();
 
             double[] yVal = new double[dts.Count - 1];
@@ -54,16 +53,16 @@ namespace SGT_MRA
 
             PopulateArrayReturnSeries(dts, yVal, xVars, xVals);
 
-            OnProgressChanged($"Performing Unhedged model");
-            mRegressionResults.Add(PerformUnhedged(yVal));
+            ProgressChanged($"Performing Unhedged model");
+            AddRegressionResult(PerformUnhedged(yVal));
 
             for (int k = 1; k <= xVars.Length; k++)
             {
-                OnProgressChanged($"Performing Regressions for param count: " + k);
-                mRegressionResults.Add(PerformMinimumSEOlsForK(yVal, xVars, xVals, k));
+                ProgressChanged($"Performing Regressions for param count: " + k);
+                AddRegressionResult(PerformMinimumSEOlsForK(yVal, xVars, xVals, k));
             }
 
-            OnProgressChanged($"Completed");
+            ProgressChanged($"Completed");
         }
 
         private RegressionResult PerformUnhedged(double[] yVal)
@@ -73,7 +72,7 @@ namespace SGT_MRA
             r.Mean = average;
 
             double sumOfSquaresOfDifferences = yVal.Select(val => (val - average) * (val - average)).Sum();
-            double sd = Math.Sqrt(sumOfSquaresOfDifferences / yVal.Length);
+            double sd = Math.Sqrt(sumOfSquaresOfDifferences / (yVal.Length -1));
 
             r.ModelType = "UNHEDGED";
             r.StandardError = sd;
@@ -81,10 +80,6 @@ namespace SGT_MRA
             r.SamplesCount = yVal.Length;
 
             return r;
-        }
-
-        public BindingList<RegressionResult> GetResults(){
-            return mRegressionResults;
         }
 
         private static RegressionResult PerformMinimumSEOlsForK(double[] yVal, string[] xVars, double[][] xVals, int k)
@@ -241,12 +236,21 @@ namespace SGT_MRA
             }
         }
 
-        private void OnProgressChanged(string progress)
+        private void ProgressChanged(string progress)
         {
-            var eh = ProgressChanged;
+            var eh = AProgressChanged;
             if(eh != null)
             {
                 eh(progress);
+            }
+        }
+
+        private void AddRegressionResult(RegressionResult resultToAdd)
+        {
+            var eh = AAddRegressionResult;
+            if (eh != null)
+            {
+                eh(resultToAdd);
             }
         }
     }
