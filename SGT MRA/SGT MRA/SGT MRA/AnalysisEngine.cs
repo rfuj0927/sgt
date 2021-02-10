@@ -15,13 +15,15 @@ namespace SGT_MRA
         public event Action<string> ProgressChanged;
 
         private MraParams mMraParams;
-        private IDataQuerier mDataQuerier;
+        private IDataQuerier mEikonDataDataQuerier;
+        private CustomTickerHistoryDataQuerier mCustomTickerHistoryDataQuerier;
         private BindingList<RegressionResult> mRegressionResults = new BindingList<RegressionResult>();
 
-        public AnalysisEngine(MraParams p, IDataQuerier q)
+        public AnalysisEngine(MraParams p, IDataQuerier q, CustomTickerHistoryDataQuerier c)
         {
             this.mMraParams = p;
-            this.mDataQuerier = q;
+            this.mEikonDataDataQuerier = q;
+            this.mCustomTickerHistoryDataQuerier = c;
         }
 
         public void Run()
@@ -193,25 +195,26 @@ namespace SGT_MRA
         {
             Dictionary<DateTime, double> series;
 
+            IDataQuerier q = mCustomTickerHistoryDataQuerier.HasTicker(vp.ticker) ? mCustomTickerHistoryDataQuerier : mEikonDataDataQuerier;
             switch (vp.seriesType)
             {
                 case SeriesType.Price:
 
-                    series = mDataQuerier.GetClosePriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                    series = q.GetClosePriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
                     break;
 
                 case SeriesType.NavTr:
                     {
-                        series = mDataQuerier.GetNavPriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
-                        Dictionary<DateTime, double> divSeries = mDataQuerier.GetEtfDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                        series = q.GetNavPriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                        Dictionary<DateTime, double> divSeries = q.GetEtfDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
                         AddCumulativeDivsToTimeSeries(series, divSeries);
                         break;
                     }
 
                 case SeriesType.PriceTr:
                     {
-                        series = mDataQuerier.GetClosePriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
-                        Dictionary<DateTime, double> divSeries = mDataQuerier.GetStockDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                        series = q.GetClosePriceSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
+                        Dictionary<DateTime, double> divSeries = q.GetStockDividendSeries(mMraParams.fromDt, mMraParams.toDt, vp.ticker);
                         AddCumulativeDivsToTimeSeries(series, divSeries);
                         break;
                     }

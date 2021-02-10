@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -32,6 +33,8 @@ namespace SGT_MRA
         private BindingList<String> mPriceReturnTypeBindingList = new BindingList<String>();
 
         public static string OUT_DATE_FORMAT = "dd/MM/yyyy";
+        public static String mCustomTickerHistoryFilePath;
+
         public SgtMraMainForm()
         {
             InitializeComponent();
@@ -103,7 +106,7 @@ namespace SGT_MRA
                 p.xVariables.Add(new VariablePair((string)row.Cells[0].Value, (SeriesType)Enum.Parse(typeof(SeriesType), (string)row.Cells[1].Value)));
             }
 
-            AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY));
+            AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY), new CustomTickerHistoryDataQuerier(mCustomTickerHistoryFilePath));
             resultsDgv.DataSource = analysisEngine.GetResults();
             analysisEngine.ProgressChanged += ProgressChanged;
             analysisEngine.Run();
@@ -124,6 +127,16 @@ namespace SGT_MRA
         public static string GetMemberName<T, TValue>(Expression<Func<T, TValue>> memberAccess)
         {
             return ((MemberExpression)memberAccess.Body).Member.Name;
+        }
+
+        private void loadCustomTickerHistoryButton_OnClick(object sender, EventArgs e)
+        {
+            customTickerHistoryOpenFileDialog.ShowDialog();
+        }
+
+        private void customTickerHistoryOpenFileDialog_OnFileOk(object sender, CancelEventArgs e)
+        {
+            mCustomTickerHistoryFilePath = customTickerHistoryOpenFileDialog.FileName;
         }
     }
 }

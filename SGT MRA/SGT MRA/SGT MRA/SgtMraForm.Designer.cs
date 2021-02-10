@@ -29,7 +29,9 @@ namespace SGT_MRA
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SgtMraMainForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,6 +52,9 @@ namespace SGT_MRA
             this.resultsDgv = new System.Windows.Forms.DataGridView();
             this.label7 = new System.Windows.Forms.Label();
             this.returnTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.customTickerHistoryOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.loadCustomTickerHistoryButton = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xParamsDgv)).BeginInit();
@@ -70,7 +75,7 @@ namespace SGT_MRA
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.59515F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1279, 407);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1279, 435);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -95,6 +100,7 @@ namespace SGT_MRA
             this.tableLayoutPanel2.Controls.Add(this.statusLabel, 1, 9);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.returnTypeComboBox, 3, 2);
+            this.tableLayoutPanel2.Controls.Add(this.loadCustomTickerHistoryButton, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -110,7 +116,7 @@ namespace SGT_MRA
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(366, 401);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(366, 429);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -134,7 +140,7 @@ namespace SGT_MRA
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 40);
+            this.label3.Location = new System.Drawing.Point(3, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(17, 13);
             this.label3.TabIndex = 2;
@@ -145,7 +151,7 @@ namespace SGT_MRA
             this.fromDateTimePicker.CustomFormat = "";
             this.fromDateTimePicker.Location = new System.Drawing.Point(57, 3);
             this.fromDateTimePicker.Name = "fromDateTimePicker";
-            this.fromDateTimePicker.Size = new System.Drawing.Size(89, 20);
+            this.fromDateTimePicker.Size = new System.Drawing.Size(122, 20);
             this.fromDateTimePicker.TabIndex = 5;
             this.fromDateTimePicker.Value = new System.DateTime(2021, 1, 7, 12, 17, 14, 0);
             // 
@@ -154,14 +160,14 @@ namespace SGT_MRA
             this.toDateTimePicker.CustomFormat = "";
             this.toDateTimePicker.Location = new System.Drawing.Point(239, 3);
             this.toDateTimePicker.Name = "toDateTimePicker";
-            this.toDateTimePicker.Size = new System.Drawing.Size(95, 20);
+            this.toDateTimePicker.Size = new System.Drawing.Size(124, 20);
             this.toDateTimePicker.TabIndex = 6;
             this.toDateTimePicker.Value = new System.DateTime(2021, 1, 7, 12, 17, 14, 0);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 160);
+            this.label5.Location = new System.Drawing.Point(3, 168);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 13);
             this.label5.TabIndex = 7;
@@ -175,11 +181,11 @@ namespace SGT_MRA
             this.SeriesType});
             this.tableLayoutPanel2.SetColumnSpan(this.xParamsDgv, 3);
             this.xParamsDgv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xParamsDgv.Location = new System.Drawing.Point(57, 163);
+            this.xParamsDgv.Location = new System.Drawing.Point(57, 171);
             this.xParamsDgv.Name = "xParamsDgv";
             this.xParamsDgv.RowHeadersVisible = false;
             this.tableLayoutPanel2.SetRowSpan(this.xParamsDgv, 5);
-            this.xParamsDgv.Size = new System.Drawing.Size(306, 194);
+            this.xParamsDgv.Size = new System.Drawing.Size(306, 204);
             this.xParamsDgv.TabIndex = 2;
             this.xParamsDgv.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.xParamsDgv_OnCellValidating);
             // 
@@ -196,7 +202,7 @@ namespace SGT_MRA
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(185, 40);
+            this.label4.Location = new System.Drawing.Point(185, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 26);
             this.label4.TabIndex = 4;
@@ -206,23 +212,24 @@ namespace SGT_MRA
             // 
             this.ySeriesTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ySeriesTypeComboBox.FormattingEnabled = true;
-            this.ySeriesTypeComboBox.Location = new System.Drawing.Point(239, 43);
+            this.ySeriesTypeComboBox.Location = new System.Drawing.Point(239, 45);
             this.ySeriesTypeComboBox.Name = "ySeriesTypeComboBox";
             this.ySeriesTypeComboBox.Size = new System.Drawing.Size(95, 21);
             this.ySeriesTypeComboBox.TabIndex = 9;
             // 
             // ySymbolTextBox
             // 
-            this.ySymbolTextBox.Location = new System.Drawing.Point(57, 43);
+            this.ySymbolTextBox.Location = new System.Drawing.Point(57, 45);
             this.ySymbolTextBox.Name = "ySymbolTextBox";
-            this.ySymbolTextBox.Size = new System.Drawing.Size(89, 20);
+            this.ySymbolTextBox.Size = new System.Drawing.Size(122, 20);
             this.ySymbolTextBox.TabIndex = 1;
             // 
             // regressButton
             // 
-            this.regressButton.Location = new System.Drawing.Point(57, 83);
+            this.regressButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.regressButton.Location = new System.Drawing.Point(57, 87);
             this.regressButton.Name = "regressButton";
-            this.regressButton.Size = new System.Drawing.Size(89, 21);
+            this.regressButton.Size = new System.Drawing.Size(122, 36);
             this.regressButton.TabIndex = 12;
             this.regressButton.Text = "Regress";
             this.regressButton.UseVisualStyleBackColor = true;
@@ -231,7 +238,7 @@ namespace SGT_MRA
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 360);
+            this.label6.Location = new System.Drawing.Point(3, 378);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 13;
@@ -241,7 +248,7 @@ namespace SGT_MRA
             // 
             this.statusLabel.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.statusLabel, 3);
-            this.statusLabel.Location = new System.Drawing.Point(57, 360);
+            this.statusLabel.Location = new System.Drawing.Point(57, 378);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(50, 13);
             this.statusLabel.TabIndex = 14;
@@ -264,14 +271,14 @@ namespace SGT_MRA
             this.resultsDgv.Location = new System.Drawing.Point(375, 3);
             this.resultsDgv.Name = "resultsDgv";
             this.resultsDgv.RowHeadersVisible = false;
-            this.resultsDgv.Size = new System.Drawing.Size(901, 401);
+            this.resultsDgv.Size = new System.Drawing.Size(901, 429);
             this.resultsDgv.TabIndex = 1;
             this.resultsDgv.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.resutlsDgv_OnCellFormatting);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(185, 80);
+            this.label7.Location = new System.Drawing.Point(185, 84);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 26);
             this.label7.TabIndex = 15;
@@ -281,17 +288,36 @@ namespace SGT_MRA
             // 
             this.returnTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.returnTypeComboBox.FormattingEnabled = true;
-            this.returnTypeComboBox.Location = new System.Drawing.Point(239, 83);
+            this.returnTypeComboBox.Location = new System.Drawing.Point(239, 87);
             this.returnTypeComboBox.Name = "returnTypeComboBox";
             this.returnTypeComboBox.Size = new System.Drawing.Size(95, 21);
             this.returnTypeComboBox.TabIndex = 16;
+            // 
+            // customTickerHistoryOpenFileDialog
+            // 
+            this.customTickerHistoryOpenFileDialog.FileName = "ExampleData.csv";
+            this.customTickerHistoryOpenFileDialog.RestoreDirectory = true;
+            this.customTickerHistoryOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.customTickerHistoryOpenFileDialog_OnFileOk);
+            // 
+            // loadCustomTickerHistoryButton
+            // 
+            this.loadCustomTickerHistoryButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.loadCustomTickerHistoryButton.Location = new System.Drawing.Point(57, 129);
+            this.loadCustomTickerHistoryButton.Name = "loadCustomTickerHistoryButton";
+            this.loadCustomTickerHistoryButton.Size = new System.Drawing.Size(122, 36);
+            this.loadCustomTickerHistoryButton.TabIndex = 17;
+            this.loadCustomTickerHistoryButton.Text = "Load Custom Ticker History";
+            this.toolTip1.SetToolTip(this.loadCustomTickerHistoryButton, "Required CSV of format:\r\nTicker,Date,Price,Div\r\nBrownian,10/02/2021,100,0");
+            this.loadCustomTickerHistoryButton.UseVisualStyleBackColor = true;
+            this.loadCustomTickerHistoryButton.Click += new System.EventHandler(this.loadCustomTickerHistoryButton_OnClick);
             // 
             // SgtMraMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1279, 407);
+            this.ClientSize = new System.Drawing.Size(1279, 435);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SgtMraMainForm";
             this.Text = "SGT MRA";
@@ -327,6 +353,9 @@ namespace SGT_MRA
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox returnTypeComboBox;
+        private System.Windows.Forms.Button loadCustomTickerHistoryButton;
+        private System.Windows.Forms.OpenFileDialog customTickerHistoryOpenFileDialog;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
