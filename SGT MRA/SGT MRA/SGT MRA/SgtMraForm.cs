@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -28,7 +29,7 @@ namespace SGT_MRA
 
     public partial class SgtMraMainForm : Form
     {
-        private static string EIKON_DATA_API_KEY = "74700e057f8846369b99cdec93338ab78a0a3314";
+        private static string EIKON_DATA_API_KEY = ConfigurationManager.AppSettings["EIKON_APP_ID"];
 
         private BindingList<String> mSeriesTypeBindingList = new BindingList<String>();
         private BindingList<String> mPriceReturnTypeBindingList = new BindingList<String>();
