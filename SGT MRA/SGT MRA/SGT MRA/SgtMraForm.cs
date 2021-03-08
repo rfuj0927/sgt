@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SGTUtils;
 
 /*
  * TODO 
@@ -37,11 +38,15 @@ namespace SGT_MRA
         public static string OUT_DATE_FORMAT = "dd/MM/yyyy";
         public static String mCustomTickerHistoryFilePath;
 
-        private BindingList<RegressionResult> mRegressionResults = new BindingList<RegressionResult>();
+        private SortableBindingList<RegressionResult> mRegressionResults;
 
         public SgtMraMainForm()
         {
             InitializeComponent();
+
+            List<RegressionResult> internalRegressionResults = new List<RegressionResult>();
+            mRegressionResults = new SortableBindingList<RegressionResult>(internalRegressionResults);
+
             resultsDgv.DataSource = mRegressionResults;
 
             foreach (SeriesType s in Enum.GetValues(typeof(SeriesType)))

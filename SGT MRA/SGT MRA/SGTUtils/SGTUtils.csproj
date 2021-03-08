@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SgtMathUtils\SgtMathUtils.cs" />
+    <Compile Include="SgtStringUtls\SgtStringUtils.cs" />
+    <Compile Include="SortableBindingList.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

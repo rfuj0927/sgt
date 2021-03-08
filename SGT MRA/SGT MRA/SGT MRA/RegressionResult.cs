@@ -15,8 +15,12 @@ namespace SGT_MRA
         
         public string Betas { get; set; }
         public double RSquared { get; set; }
+        public double AdjRSquared { get; set; }
         public double StandardError { get; set; }
         public double Mean { get; set; }
+        public string CoeffStandardErrors { get; set; }
+        public string CoeffTScores { get; set; }
+        public string CoeffPVals { get; set; }
         public int SamplesCount { get; set; }
     }
 }

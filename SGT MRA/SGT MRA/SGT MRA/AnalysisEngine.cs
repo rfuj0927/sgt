@@ -1,6 +1,7 @@
 ﻿using Accord.Math.Optimization.Losses;
 using Accord.Statistics.Models.Regression.Linear;
-using SGTUtils.SgtMathUtils;
+using Accord.Statistics.Testing;
+using SGTUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,6 +76,8 @@ namespace SGT_MRA
             double sd = Math.Sqrt(sumOfSquaresOfDifferences / (yVal.Length -1));
 
             r.ModelType = "UNHEDGED";
+            r.RSquared = 0;
+            r.AdjRSquared = 0;
             r.StandardError = sd;
             r.xVarCount = 0;
             r.SamplesCount = yVal.Length;
@@ -125,6 +128,8 @@ namespace SGT_MRA
             var ols = new OrdinaryLeastSquares()
             {
                 // intercept should represent the return if no impact from inputs. (mean daily return)
+                // forcing to 0 as we assume that all explanation of price move should be due to independenet variables.
+                // in reality there is likely an unexplainable drift. For example daily bleed (MER, funding etc).
                 UseIntercept = false
             };
 
@@ -134,14 +139,49 @@ namespace SGT_MRA
             RegressionResult r = new RegressionResult();
             r.ModelType = "OLS";
             r.StandardError = regression.GetStandardError(xVals, yVal);
-            r.RSquared = new RSquaredLoss(xVals.Length, yVal).Loss(predicted);
-            r.Betas = string.Join(";", regression.Weights.Select(x=>Math.Round(x, 4)).ToList());
+            // r.RSquared = new RSquaredLoss(xVals.Length, yVal, ).Loss(predicted);
+            r.RSquared = regression.CoefficientOfDetermination(xVals, yVal, false);
+            r.AdjRSquared = regression.CoefficientOfDetermination(xVals, yVal, true);
+            r.Betas = SgtStringUtils.DoubleArrayToRoundedDelimitedString(regression.Weights);
             r.xVars = string.Join(";", xVars);
+
+            // TODO need to validate the below section. add p-values?
+            double[] coeffStandardErrors = regression.GetStandardErrors(r.StandardError, ols.GetInformationMatrix());
+            double[] coeffTScores = DoubleDivide(regression.Weights, coeffStandardErrors);
+            double[] coeffPVals = new double[coeffTScores.Length];
+
+            double df = xVals.Length - 1;
+            for (int i = 0; i < coeffTScores.Length; i++)
+            {
+                TTest tTest = new TTest(coeffTScores[i], df, OneSampleHypothesis.ValueIsDifferentFromHypothesis);
+                coeffPVals[i] = tTest.PValue;
+            }
+
+            r.CoeffStandardErrors = SgtStringUtils.DoubleArrayToRoundedDelimitedString(coeffStandardErrors);
+            r.CoeffTScores = SgtStringUtils.DoubleArrayToRoundedDelimitedString(coeffTScores);
+            r.CoeffPVals= SgtStringUtils.DoubleArrayToRoundedDelimitedString(coeffPVals);
+            // /TODO
+
             r.xVarCount = regression.NumberOfInputs;
             r.SamplesCount = yVal.Length;
             r.Mean = regression.Intercept;
 
             return r;
+        }
+
+        public static double[] DoubleDivide(double[] a1, double[] a2)
+        {
+            if(a1.Length != a2.Length)
+            {
+                throw new Exception("Invalid non matching array sizes.");
+            }
+            double[] o = new double[a1.Length];
+            int index = 0;
+            foreach(int i in a1)
+            {
+                o[index] = i / a2[index];
+            }
+            return o;
         }
 
         private void PopulateArrayReturnSeries(List<DateTime> dts, double[] yVals, string[] xVars, double[][] xVals)
