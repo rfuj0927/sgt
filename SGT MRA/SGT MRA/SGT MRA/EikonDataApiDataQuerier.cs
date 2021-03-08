@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SGT_MRA
 {
@@ -52,7 +53,8 @@ namespace SGT_MRA
                     Thread.Sleep(1000);
                     return ExecuteQuery(ticker, fields, eParams, retryCount);
                 }
-                
+
+                MessageBox.Show(ex.Message, "Eikon API Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw ex;
             }
         }
