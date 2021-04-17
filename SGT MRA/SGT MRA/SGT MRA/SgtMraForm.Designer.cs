@@ -41,8 +41,6 @@ namespace SGT_MRA
             this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.xParamsDgv = new System.Windows.Forms.DataGridView();
-            this.Ric = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SeriesType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.ySeriesTypeComboBox = new System.Windows.Forms.ComboBox();
             this.ySymbolTextBox = new System.Windows.Forms.TextBox();
@@ -52,17 +50,19 @@ namespace SGT_MRA
             this.label7 = new System.Windows.Forms.Label();
             this.returnTypeComboBox = new System.Windows.Forms.ComboBox();
             this.loadCustomTickerHistoryButton = new System.Windows.Forms.Button();
+            this.sourceGroupBox = new System.Windows.Forms.GroupBox();
+            this.eikonSourceRadioButton = new System.Windows.Forms.RadioButton();
+            this.bbgSourceRadioButton = new System.Windows.Forms.RadioButton();
             this.resultsDgv = new System.Windows.Forms.DataGridView();
             this.customTickerHistoryOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.bbgSourceRadioButton = new System.Windows.Forms.RadioButton();
-            this.eikonSourceRadioButton = new System.Windows.Forms.RadioButton();
-            this.sourceGroupBox = new System.Windows.Forms.GroupBox();
+            this.Ticker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SeriesType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xParamsDgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resultsDgv)).BeginInit();
             this.sourceGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultsDgv)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -74,7 +74,7 @@ namespace SGT_MRA
             this.tableLayoutPanel1.Controls.Add(this.resultsDgv, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.59515F));
@@ -182,7 +182,7 @@ namespace SGT_MRA
             // 
             this.xParamsDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.xParamsDgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Ric,
+            this.Ticker,
             this.SeriesType});
             this.tableLayoutPanel2.SetColumnSpan(this.xParamsDgv, 3);
             this.xParamsDgv.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -194,20 +194,6 @@ namespace SGT_MRA
             this.xParamsDgv.Size = new System.Drawing.Size(315, 199);
             this.xParamsDgv.TabIndex = 2;
             this.xParamsDgv.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.xParamsDgv_OnCellValidating);
-            // 
-            // Ric
-            // 
-            this.Ric.HeaderText = "Ric";
-            this.Ric.MinimumWidth = 8;
-            this.Ric.Name = "Ric";
-            this.Ric.Width = 150;
-            // 
-            // SeriesType
-            // 
-            this.SeriesType.HeaderText = "Series Type";
-            this.SeriesType.MinimumWidth = 8;
-            this.SeriesType.Name = "SeriesType";
-            this.SeriesType.Width = 150;
             // 
             // label4
             // 
@@ -294,6 +280,38 @@ namespace SGT_MRA
             this.loadCustomTickerHistoryButton.UseVisualStyleBackColor = true;
             this.loadCustomTickerHistoryButton.Click += new System.EventHandler(this.loadCustomTickerHistoryButton_OnClick);
             // 
+            // sourceGroupBox
+            // 
+            this.sourceGroupBox.Controls.Add(this.eikonSourceRadioButton);
+            this.sourceGroupBox.Controls.Add(this.bbgSourceRadioButton);
+            this.sourceGroupBox.Location = new System.Drawing.Point(246, 126);
+            this.sourceGroupBox.Name = "sourceGroupBox";
+            this.sourceGroupBox.Size = new System.Drawing.Size(128, 35);
+            this.sourceGroupBox.TabIndex = 18;
+            this.sourceGroupBox.TabStop = false;
+            // 
+            // eikonSourceRadioButton
+            // 
+            this.eikonSourceRadioButton.AutoSize = true;
+            this.eikonSourceRadioButton.Location = new System.Drawing.Point(50, 9);
+            this.eikonSourceRadioButton.Name = "eikonSourceRadioButton";
+            this.eikonSourceRadioButton.Size = new System.Drawing.Size(52, 17);
+            this.eikonSourceRadioButton.TabIndex = 1;
+            this.eikonSourceRadioButton.Text = "Eikon";
+            this.eikonSourceRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // bbgSourceRadioButton
+            // 
+            this.bbgSourceRadioButton.AutoSize = true;
+            this.bbgSourceRadioButton.Checked = true;
+            this.bbgSourceRadioButton.Location = new System.Drawing.Point(0, 9);
+            this.bbgSourceRadioButton.Name = "bbgSourceRadioButton";
+            this.bbgSourceRadioButton.Size = new System.Drawing.Size(44, 17);
+            this.bbgSourceRadioButton.TabIndex = 0;
+            this.bbgSourceRadioButton.TabStop = true;
+            this.bbgSourceRadioButton.Text = "Bbg";
+            this.bbgSourceRadioButton.UseVisualStyleBackColor = true;
+            // 
             // resultsDgv
             // 
             this.resultsDgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -322,37 +340,19 @@ namespace SGT_MRA
             this.customTickerHistoryOpenFileDialog.RestoreDirectory = true;
             this.customTickerHistoryOpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.customTickerHistoryOpenFileDialog_OnFileOk);
             // 
-            // bbgSourceRadioButton
+            // Ticker
             // 
-            this.bbgSourceRadioButton.AutoSize = true;
-            this.bbgSourceRadioButton.Checked = true;
-            this.bbgSourceRadioButton.Location = new System.Drawing.Point(0, 9);
-            this.bbgSourceRadioButton.Name = "bbgSourceRadioButton";
-            this.bbgSourceRadioButton.Size = new System.Drawing.Size(44, 17);
-            this.bbgSourceRadioButton.TabIndex = 0;
-            this.bbgSourceRadioButton.TabStop = true;
-            this.bbgSourceRadioButton.Text = "Bbg";
-            this.bbgSourceRadioButton.UseVisualStyleBackColor = true;
+            this.Ticker.HeaderText = "Ticker";
+            this.Ticker.MinimumWidth = 8;
+            this.Ticker.Name = "Ticker";
+            this.Ticker.Width = 150;
             // 
-            // eikonSourceRadioButton
+            // SeriesType
             // 
-            this.eikonSourceRadioButton.AutoSize = true;
-            this.eikonSourceRadioButton.Location = new System.Drawing.Point(50, 9);
-            this.eikonSourceRadioButton.Name = "eikonSourceRadioButton";
-            this.eikonSourceRadioButton.Size = new System.Drawing.Size(52, 17);
-            this.eikonSourceRadioButton.TabIndex = 1;
-            this.eikonSourceRadioButton.Text = "Eikon";
-            this.eikonSourceRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // sourceGroupBox
-            // 
-            this.sourceGroupBox.Controls.Add(this.eikonSourceRadioButton);
-            this.sourceGroupBox.Controls.Add(this.bbgSourceRadioButton);
-            this.sourceGroupBox.Location = new System.Drawing.Point(246, 126);
-            this.sourceGroupBox.Name = "sourceGroupBox";
-            this.sourceGroupBox.Size = new System.Drawing.Size(128, 35);
-            this.sourceGroupBox.TabIndex = 18;
-            this.sourceGroupBox.TabStop = false;
+            this.SeriesType.HeaderText = "Series Type";
+            this.SeriesType.MinimumWidth = 8;
+            this.SeriesType.Name = "SeriesType";
+            this.SeriesType.Width = 150;
             // 
             // SgtMraMainForm
             // 
@@ -361,7 +361,7 @@ namespace SGT_MRA
             this.ClientSize = new System.Drawing.Size(1464, 416);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SgtMraMainForm";
             this.Text = "SGT MRA";
             this.Load += new System.EventHandler(this.SgtMraForm_OnLoad);
@@ -369,9 +369,9 @@ namespace SGT_MRA
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xParamsDgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.resultsDgv)).EndInit();
             this.sourceGroupBox.ResumeLayout(false);
             this.sourceGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.resultsDgv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -391,8 +391,6 @@ namespace SGT_MRA
         private System.Windows.Forms.DataGridView xParamsDgv;
         private System.Windows.Forms.ComboBox ySeriesTypeComboBox;
         private System.Windows.Forms.TextBox ySymbolTextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ric;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SeriesType;
         private System.Windows.Forms.Button regressButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label statusLabel;
@@ -404,6 +402,8 @@ namespace SGT_MRA
         private System.Windows.Forms.GroupBox sourceGroupBox;
         private System.Windows.Forms.RadioButton eikonSourceRadioButton;
         private System.Windows.Forms.RadioButton bbgSourceRadioButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ticker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeriesType;
     }
 }
 
