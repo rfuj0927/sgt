@@ -17,13 +17,13 @@ namespace SGT_MRA
         public event Action<RegressionResult> AAddRegressionResult;
 
         private MraParams mMraParams;
-        private IDataQuerier mEikonDataDataQuerier;
+        private IDataQuerier mReferenceDataQuerier;
         private CustomTickerHistoryDataQuerier mCustomTickerHistoryDataQuerier;
 
         public AnalysisEngine(MraParams p, IDataQuerier q, CustomTickerHistoryDataQuerier c)
         {
             this.mMraParams = p;
-            this.mEikonDataDataQuerier = q;
+            this.mReferenceDataQuerier = q;
             this.mCustomTickerHistoryDataQuerier = c;
         }
 
@@ -230,7 +230,7 @@ namespace SGT_MRA
         {
             Dictionary<DateTime, double> series;
 
-            IDataQuerier q = mCustomTickerHistoryDataQuerier.HasTicker(vp.ticker) ? mCustomTickerHistoryDataQuerier : mEikonDataDataQuerier;
+            IDataQuerier q = mCustomTickerHistoryDataQuerier.HasTicker(vp.ticker) ? mCustomTickerHistoryDataQuerier : mReferenceDataQuerier;
             switch (vp.seriesType)
             {
                 case SeriesType.Price:

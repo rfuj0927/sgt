@@ -145,7 +145,18 @@ namespace SGT_MRA
             resultsDgv.Invalidate();
 
             Task.Run(()=>{
-                AnalysisEngine analysisEngine = new AnalysisEngine(p, new EikonDataApiDataQuerier(EIKON_DATA_API_KEY), new CustomTickerHistoryDataQuerier(mCustomTickerHistoryFilePath));
+
+                IDataQuerier sourceDataQuerier;
+                if (bbgSourceRadioButton.Checked)
+                {
+                    sourceDataQuerier = new BbgDataApiDataQuerier();
+                }
+                else
+                {
+                    sourceDataQuerier = new EikonDataApiDataQuerier(EIKON_DATA_API_KEY);
+                }
+
+                AnalysisEngine analysisEngine = new AnalysisEngine(p, sourceDataQuerier, new CustomTickerHistoryDataQuerier(mCustomTickerHistoryFilePath));
                 analysisEngine.AProgressChanged += OnProgressChanged;
                 analysisEngine.AAddRegressionResult += OnAddRegressionResult;
                 analysisEngine.Run();
