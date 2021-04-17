@@ -168,6 +168,7 @@ namespace SGT_MRA
             string columnName = resultsDgv.Columns[e.ColumnIndex].Name;
 
             if(columnName.Equals(GetMemberName((RegressionResult c) => c.RSquared))
+                || columnName.Equals(GetMemberName((RegressionResult c) => c.AdjRSquared))
                 || columnName.Equals(GetMemberName((RegressionResult c) => c.StandardError))
                 || columnName.Equals(GetMemberName((RegressionResult c) => c.Mean)))
             {
